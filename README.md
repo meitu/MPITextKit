@@ -7,7 +7,7 @@
 
 Powerful text framework for iOS to display rich text based on TextKit, inspired by [Texture](https://github.com/texturegroup/texture) and [YYText](https://github.com/ibireme/YYText).
 
-<p align="center">
+<p align="left">
     <img src="./Example/Screenshots/screenshot_list.png" width="240">
     <img src="./Example/Screenshots/screenshot_text_attributes.png" width="240">
     <img src="./Example/Screenshots/screenshot_text_attachment.png" width="240">
