@@ -2,3 +2,4 @@ Example/MPITextKit.xcodeproj/xcuserdata/tpphha.xcuserdatad/xcschemes/xcschememan
 Example/MPITextKit.xcworkspace/xcuserdata/tpphha.xcuserdatad/UserInterfaceState.xcuserstate
 xcschememanagement.plist
 IDEFindNavigatorScopes.plist
+*.xcbkptlist
