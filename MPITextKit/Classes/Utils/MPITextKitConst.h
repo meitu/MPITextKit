@@ -41,6 +41,7 @@ FOUNDATION_EXTERN const CGSize MPITextContainerMaxSize;
 
 UIKIT_EXTERN NSAttributedStringKey const MPITextLinkAttributeName NS_SWIFT_NAME(MPILink); ///< Attribute name for links. The value must be MPITextLink object.
 UIKIT_EXTERN NSAttributedStringKey const MPITextBackgroundAttributeName NS_SWIFT_NAME(MPIBackground);
+UIKIT_EXTERN NSAttributedStringKey const MPITextBlockBackgroundAttributeName NS_SWIFT_NAME(MPIBlockBackground);
 UIKIT_EXTERN NSAttributedStringKey const MPITextBackedStringAttributeName NS_SWIFT_NAME(MPIBackedString);
 UIKIT_EXTERN NSAttributedStringKey const MPITextHighlightedAttributeName NS_SWIFT_NAME(MPIHighlighted);
 UIKIT_EXTERN NSAttributedStringKey const MPITextOriginalFontAttributeName NS_SWIFT_NAME(MPIOriginalFont); ///< You shouldn't use it.
