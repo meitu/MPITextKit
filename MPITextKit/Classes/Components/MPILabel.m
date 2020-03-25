@@ -640,7 +640,6 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     if ([self.delegate respondsToSelector:@selector(label:shouldInteractWithLink:forAttributedText:inRange:)]) {
         id value = [attributedText attribute:MPITextLinkAttributeName atIndex:linkRange.location effectiveRange:NULL];
         if (value) {
-            NSAssert([value isKindOfClass:MPITextLink.class], @"The value for MPITextLinkAttributeName must be of type MPITextLink.");
             shouldInteractLink = [self.delegate label:self shouldInteractWithLink:value forAttributedText:attributedText inRange:linkRange];
         } else {
             shouldInteractLink = NO;
@@ -686,7 +685,12 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     point = [self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size];
     
     NSRange linkRange;
-    [renderer attribute:MPITextLinkAttributeName atPoint:point effectiveRange:&linkRange inTruncation:inTruncation];
+    MPITextLink *link = [renderer attribute:MPITextLinkAttributeName atPoint:point effectiveRange:&linkRange inTruncation:inTruncation];
+#if DEBUG
+    if (linkRange.location != NSNotFound) {
+        NSAssert([link isKindOfClass:MPITextLink.class], @"The value for MPITextLinkAttributeName must be of type MPITextLink.");
+    }
+#endif
     return linkRange;
 }
 
