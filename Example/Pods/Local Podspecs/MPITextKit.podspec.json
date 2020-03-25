@@ -2,8 +2,7 @@
   "name": "MPITextKit",
   "version": "0.1.0",
   "summary": "Powerful text framework for iOS to display text based on TextKit.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/tpx/MPITextKit",
+  "homepage": "https://github.com/meitu/MPITextKit",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +11,7 @@
     "tpphha": "tpphha@gmail.com"
   },
   "source": {
-    "git": "https://github.com/tpx/MPITextKit.git",
+    "git": "https://github.com/meitu/MPITextKit.git",
     "tag": "0.1.0"
   },
   "platforms": {
