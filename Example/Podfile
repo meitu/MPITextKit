@@ -1,0 +1,15 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'MPITextKit_Example' do
+  pod 'MPITextKit', :path => '../'
+  pod 'YYImage'
+
+  target 'MPITextKit_Tests' do
+    inherit! :search_paths
+
+#    pod 'Specta'
+#    pod 'Expecta'
+  end
+end

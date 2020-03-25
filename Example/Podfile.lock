@@ -1,0 +1,25 @@
+PODS:
+  - MPITextKit (0.1.0)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+
+DEPENDENCIES:
+  - MPITextKit (from `../`)
+  - YYImage
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - YYImage
+
+EXTERNAL SOURCES:
+  MPITextKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MPITextKit: 892c2800f0cc7269e0e3ca383187b1010d4cc8f6
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+
+PODFILE CHECKSUM: 9389e39045614bb91ce9230af3b69e00dbab997f
+
+COCOAPODS: 1.9.1
