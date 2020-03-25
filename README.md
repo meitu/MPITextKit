@@ -1,8 +1,8 @@
 # MPITextKit
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/MPITextKit/master/LICENSE)&nbsp;
-[![CocoaPods](http://img.shields.io/cocoapods/v/MPITextKit.svg?style=flat)](http://cocoapods.org/pods/MPITextKit)&nbsp;
-[![CocoaPods](http://img.shields.io/cocoapods/p/MPITextKit.svg?style=flat)](http://cocoadocs.org/docsets/MPITextKit)&nbsp;
+[![CocoaPods](https://img.shields.io/cocoapods/v/MPITextKit.svg?style=flat)](http://cocoapods.org/pods/MPITextKit)&nbsp;
+[![Platform](https://img.shields.io/cocoapods/p/MPITextKit.svg?style=flat)](http://cocoadocs.org/docsets/MPITextKit)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS%209%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
 Powerful text framework for iOS to display rich text based on TextKit, inspired by [Texture](https://github.com/texturegroup/texture) and [YYText](https://github.com/ibireme/YYText).
