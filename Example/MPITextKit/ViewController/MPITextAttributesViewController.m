@@ -139,15 +139,15 @@
         background.borderEdges = UIRectEdgeLeft;
         background.insets = UIEdgeInsetsMake(0, 8, 0, 0);
         background.fillColor = [[UIColor blueColor] colorWithAlphaComponent:0.1];
-        background.block = YES;
         NSString *quote = @"『《我的阿勒泰》是作者十年来散文创作的合集。分为阿勒泰文字、阿勒泰角落和九篇雪三辑。这是一部描写疆北阿勒泰地区生活和风情的原生态散文集。充满生机活泼、新鲜动人的元素。记录作者在疆北阿勒泰地区生活的点滴，包括人与事的记忆。作者在十年前以天才的触觉和笔调初现文坛并引起震惊。作品风格清新、明快，质地纯粹，原生态地再现了疆北风物，带着非常活泼的生机。』";
         NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:quote
                                                                                 attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout],
                                                                                              NSParagraphStyleAttributeName: paragraphStyle,
-                                                                                             MPITextBackgroundAttributeName: background}];
+                                                                                             MPITextBlockBackgroundAttributeName: background}];
         NSRange bookRange = [quote rangeOfString:@"《我的阿勒泰》"];
         MPITextBackground *linkBackground = [MPITextBackground backgroundWithFillColor:[UIColor colorWithWhite:0.000 alpha:0.220] cornerRadius:3];
-        [one addAttribute:MPITextLinkAttributeName value:linkBackground range:bookRange];
+        [one addAttribute:MPITextBackgroundAttributeName value:linkBackground range:bookRange];
+        [one addAttribute:MPITextLinkAttributeName value:[MPITextLink new] range:bookRange];
         [one addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] range:bookRange];
         [text appendAttributedString:one];
         [text appendAttributedString:[self padding]];
