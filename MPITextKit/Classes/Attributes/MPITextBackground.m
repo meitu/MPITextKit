@@ -37,7 +37,6 @@
 
 - (NSUInteger)hash {
     struct {
-        BOOL block;
         CGFloat borderWidth;
         NSUInteger borderColorHash;
         NSUInteger borderEdges;
@@ -47,7 +46,6 @@
         NSUInteger fillColorHash;
         UIEdgeInsets insets;
     } data = {
-        _block,
         _borderWidth,
         [_borderColor hash],
         _borderEdges,
@@ -70,7 +68,6 @@
     }
     
     return
-    _block == object.block &&
     ABS(_borderWidth - object.borderWidth) < FLT_EPSILON &&
     MPITextObjectIsEqual(_borderColor, object.borderColor) &&
     _borderEdges == object.borderEdges &&

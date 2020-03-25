@@ -38,9 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// inner fill color
 @property (nullable, nonatomic, strong) UIColor *fillColor;
 
-/// A Boolean value indicating whether the background is block, default NO.
-@property (nonatomic, getter=isBlock) BOOL block;
-
 + (instancetype)backgroundWithFillColor:(nullable UIColor *)color cornerRadius:(CGFloat)cornerRadius;
 
 /**

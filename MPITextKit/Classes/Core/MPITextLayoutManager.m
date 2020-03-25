@@ -16,6 +16,11 @@
 #import "MPITextDebugOption.h"
 #import <CoreText/CoreText.h>
 
+typedef NS_ENUM(NSInteger, MPITextBackgroundType) {
+    MPITextBackgroundTypeNormal,
+    MPITextBackgroundTypeBlock
+};
+
 /**
  NOTE:
  -fillBackgroundRectArray:count:forCharacterRange:color: The draws is incorrect in this method.
@@ -29,7 +34,9 @@
 
 #pragma mark - Background
 
-- (MPITextBackgroundsInfo *)backgroundsInfoForGlyphRange:(NSRange)glyphsToShow inTextContainer:(NSTextContainer *)textContainer {
+- (MPITextBackgroundsInfo *)backgroundsInfoWithBackgroundType:(MPITextBackgroundType)backgroundType
+                                                forGlyphRange:(NSRange)glyphsToShow
+                                              inTextContainer:(NSTextContainer *)textContainer {
     if (glyphsToShow.length == 0) {
         return nil;
     }
@@ -40,7 +47,8 @@
     NSMutableArray<NSArray *> *backgroundRectArrays = [NSMutableArray new];
     NSMutableArray<NSValue *> *backgroundCharacterRanges = [NSMutableArray new];
     NSMutableArray<MPITextBackground *> *backgrounds = [NSMutableArray new];
-    [textStorage enumerateAttribute:MPITextBackgroundAttributeName inRange:characterRangeToShow options:kNilOptions usingBlock:^(MPITextBackground  *_Nullable value, NSRange range, BOOL * _Nonnull stop) {
+    NSAttributedStringKey attributeKey = backgroundType == MPITextBackgroundTypeNormal ? MPITextBackgroundAttributeName : MPITextBlockBackgroundAttributeName;
+    [textStorage enumerateAttribute:attributeKey inRange:characterRangeToShow options:kNilOptions usingBlock:^(MPITextBackground  *_Nullable value, NSRange range, BOOL * _Nonnull stop) {
         if (!value) {
             return;
         }
@@ -51,7 +59,24 @@
         }
         
         NSMutableArray<NSValue *> *rects = [NSMutableArray new];
-        if (value.isBlock) {
+        if (backgroundType == MPITextBackgroundTypeNormal) {
+            [self enumerateEnclosingRectsForGlyphRange:glyphRange withinSelectedGlyphRange:NSMakeRange(NSNotFound, 0) inTextContainer:textContainer usingBlock:^(CGRect rect, BOOL *stop) {
+                CGRect proposedRect = rect;
+                
+                // This method may return a larger value.
+                // NSRange glyphRange = [self glyphRangeForBoundingRect:proposedRect inTextContainer:textContainer];
+                NSUInteger startGlyphIndex = [self glyphIndexForPoint:CGPointMake(MPITextCGFloatPixelCeil(CGRectGetMinX(proposedRect)), CGRectGetMidY(proposedRect)) inTextContainer:textContainer];
+                NSUInteger endGlyphIndex = [self glyphIndexForPoint:CGPointMake(MPITextCGFloatPixelFloor(CGRectGetMaxX(proposedRect)), CGRectGetMidY(proposedRect)) inTextContainer:textContainer];
+                NSRange glyphRange = NSMakeRange(startGlyphIndex, endGlyphIndex - startGlyphIndex + 1);
+                NSRange characterRange = [self characterRangeForGlyphRange:glyphRange actualGlyphRange:NULL];
+                
+                proposedRect = [value  backgroundRectForTextContainer:textContainer
+                                                         proposedRect:proposedRect
+                                                       characterRange:characterRange];
+                
+                [rects addObject:[NSValue valueWithCGRect:proposedRect]];
+            }];
+        } else if (backgroundType == MPITextBackgroundTypeBlock){
             CGRect blockRect;
             NSRange effectiveGlyphRange;
             CGRect startLineFragmentRect = [self lineFragmentRectForGlyphAtIndex:glyphRange.location effectiveRange:&effectiveGlyphRange];
@@ -71,23 +96,6 @@
                                                  proposedRect:blockRect
                                                characterRange:range];
             [rects addObject:[NSValue valueWithCGRect:blockRect]];
-        } else {
-            [self enumerateEnclosingRectsForGlyphRange:glyphRange withinSelectedGlyphRange:NSMakeRange(NSNotFound, 0) inTextContainer:textContainer usingBlock:^(CGRect rect, BOOL *stop) {
-                CGRect proposedRect = rect;
-                
-                // This method may return a larger value.
-                // NSRange glyphRange = [self glyphRangeForBoundingRect:proposedRect inTextContainer:textContainer];
-                NSUInteger startGlyphIndex = [self glyphIndexForPoint:CGPointMake(MPITextCGFloatPixelCeil(CGRectGetMinX(proposedRect)), CGRectGetMidY(proposedRect)) inTextContainer:textContainer];
-                NSUInteger endGlyphIndex = [self glyphIndexForPoint:CGPointMake(MPITextCGFloatPixelFloor(CGRectGetMaxX(proposedRect)), CGRectGetMidY(proposedRect)) inTextContainer:textContainer];
-                NSRange glyphRange = NSMakeRange(startGlyphIndex, endGlyphIndex - startGlyphIndex + 1);
-                NSRange characterRange = [self characterRangeForGlyphRange:glyphRange actualGlyphRange:NULL];
-                
-                proposedRect = [value  backgroundRectForTextContainer:textContainer
-                                                         proposedRect:proposedRect
-                                                       characterRange:characterRange];
-                
-                [rects addObject:[NSValue valueWithCGRect:proposedRect]];
-            }];
         }
         
         [backgroundRectArrays addObject:rects];
@@ -100,7 +108,33 @@
                                               backgroundRectArrays:backgroundRectArrays
                                          backgroundCharacterRanges:backgroundCharacterRanges];
     }
+    return nil;
+}
+
+- (MPITextBackgroundsInfo *)backgroundsInfoForGlyphRange:(NSRange)glyphsToShow inTextContainer:(NSTextContainer *)textContainer {
+    NSMutableArray<MPITextBackground *> *backgrounds = [NSMutableArray new];
+    NSMutableArray<NSArray *> *backgroundRectArrays = [NSMutableArray new];
+    NSMutableArray<NSValue *> *backgroundCharacterRanges = [NSMutableArray new];
     
+    void(^mergeBackgroundsInfo)(MPITextBackgroundsInfo *) = ^(MPITextBackgroundsInfo *backgroundsInfo) {
+        if (backgroundsInfo.backgrounds.count > 0) {
+            [backgrounds addObjectsFromArray:backgroundsInfo.backgrounds];
+            [backgroundRectArrays addObjectsFromArray:backgroundsInfo.backgroundRectArrays];
+            [backgroundCharacterRanges addObjectsFromArray:backgroundsInfo.backgroundCharacterRanges];
+        }
+    };
+    
+    MPITextBackgroundsInfo *normalBackgroundsInfo = [self backgroundsInfoWithBackgroundType:MPITextBackgroundTypeNormal forGlyphRange:glyphsToShow inTextContainer:textContainer];
+    MPITextBackgroundsInfo *blockBackgroundsInfo = [self backgroundsInfoWithBackgroundType:MPITextBackgroundTypeBlock forGlyphRange:glyphsToShow inTextContainer:textContainer];
+    
+    mergeBackgroundsInfo(normalBackgroundsInfo);
+    mergeBackgroundsInfo(blockBackgroundsInfo);
+    
+    if (backgrounds.count > 0) {
+        return [[MPITextBackgroundsInfo alloc] initWithBackgrounds:backgrounds
+                                              backgroundRectArrays:backgroundRectArrays
+                                         backgroundCharacterRanges:backgroundCharacterRanges];
+    }
     return nil;
 }
 
