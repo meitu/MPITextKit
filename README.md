@@ -66,7 +66,6 @@ NSAttributedString *attachmetText = [NSAttributedString attributedStringWithAtta
 [text appendAttributedString:attachmetText];
     
 MPILabel *label = [MPILabel new];
-label.userInteractionEnabled = YES; // Defaluts NO.
 label.numberOfLines = 0;
 label.delegate = self; /// Interact Links.
 
