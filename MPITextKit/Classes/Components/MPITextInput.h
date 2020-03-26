@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPITextSelectionRect : UITextSelectionRect
 
 @property (nonatomic) CGRect rect;
-@property (nonatomic) UITextWritingDirection writingDirection;
+@property (nonatomic) NSWritingDirection writingDirection;
 @property (nonatomic) BOOL containsStart;
 @property (nonatomic) BOOL containsEnd;
 @property (nonatomic) BOOL isVertical;
