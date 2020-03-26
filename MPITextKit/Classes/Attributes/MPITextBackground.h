@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// It can be used to draw a background to a range of text.
-/// stored in the attributed string under the key named MPITextBackgroundAttributeName.
+/// stored in the attributed string under the key named MPITextBackgroundAttributeName or MPITextBlockBackgroundAttributeName.
 @interface MPITextBackground : NSObject
 
 /// border line width
@@ -29,10 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// border line cap
 @property (nonatomic) CGLineCap lineCap;
 
-/// border insets for text bounds
+/// background insets for text bounds
 @property (nonatomic) UIEdgeInsets insets;
 
-/// border corder radius
+/// background corder radius
+/// NOTE: When it works on borders only if borderEdges is UIRectEdgeAll.
 @property (nonatomic) CGFloat cornerRadius;
 
 /// inner fill color

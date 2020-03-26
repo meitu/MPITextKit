@@ -685,8 +685,11 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     point = [self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size];
     
     NSRange linkRange;
-    MPITextLink *link = [renderer attribute:MPITextLinkAttributeName atPoint:point effectiveRange:&linkRange inTruncation:inTruncation];
-#if DEBUG
+#ifdef DEBUG
+    MPITextLink *link =
+#endif
+    [renderer attribute:MPITextLinkAttributeName atPoint:point effectiveRange:&linkRange inTruncation:inTruncation];
+#ifdef DEBUG
     if (linkRange.location != NSNotFound) {
         NSAssert([link isKindOfClass:MPITextLink.class], @"The value for MPITextLinkAttributeName must be of type MPITextLink.");
     }

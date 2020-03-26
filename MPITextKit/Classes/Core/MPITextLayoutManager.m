@@ -180,12 +180,12 @@ typedef NS_ENUM(NSInteger, MPITextBackgroundType) {
             rect.origin.x += origin.x;
             rect.origin.y += origin.y;
             rect = CGRectInset(rect, inset, inset);
-            CGFloat scaledCornerRadius = cornerRadius;
-            if (inset > 0) {
-                scaledCornerRadius = MPITextCGFloatPixelFloor(cornerRadius * (1 - inset / CGRectGetHeight(rect)));
-            }
             UIBezierPath *path = nil;
             if (borderEdges == UIRectEdgeAll) {
+                CGFloat scaledCornerRadius = cornerRadius;
+                if (inset > 0) {
+                    scaledCornerRadius = MPITextCGFloatPixelFloor(cornerRadius * (1 - inset / CGRectGetHeight(rect)));
+                }
                 path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:scaledCornerRadius];
                 [path closePath];
             } else {
@@ -195,38 +195,20 @@ typedef NS_ENUM(NSInteger, MPITextBackgroundType) {
                 CGFloat minY = CGRectGetMinY(rect);
                 CGFloat maxY = CGRectGetMaxY(rect);
                 if (borderEdges & UIRectEdgeTop) {
-                    [path moveToPoint:CGPointMake(maxX - scaledCornerRadius, minY)];
-                    [path addLineToPoint:CGPointMake(minX + scaledCornerRadius, minY)];
+                    [path moveToPoint:CGPointMake(maxX, minY)];
+                    [path addLineToPoint:CGPointMake(minX, minY)];
                 }
                 if (borderEdges & UIRectEdgeLeft) {
-                    [path moveToPoint:CGPointMake(minX + scaledCornerRadius, minY)];
-                    if (scaledCornerRadius > 0) {
-                        UIBezierPath *borderPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(minX + scaledCornerRadius, CGRectGetMidY(rect))
-                                                                                  radius:CGRectGetHeight(rect) * 0.5
-                                                                              startAngle:M_PI + M_PI_2
-                                                                                endAngle:M_PI_2
-                                                                               clockwise:NO];
-                        [path appendPath:borderPath];
-                    } else {
-                        [path addLineToPoint:CGPointMake(minX + scaledCornerRadius, maxY)];
-                    }
+                    [path moveToPoint:CGPointMake(minX, minY)];
+                    [path addLineToPoint:CGPointMake(minX, maxY)];
                 }
                 if (borderEdges & UIRectEdgeBottom) {
-                    [path moveToPoint:CGPointMake(minX + scaledCornerRadius, maxY)];
-                    [path addLineToPoint:CGPointMake(maxX - scaledCornerRadius, maxY)];
+                    [path moveToPoint:CGPointMake(minX, maxY)];
+                    [path addLineToPoint:CGPointMake(maxX, maxY)];
                 }
                 if (borderEdges & UIRectEdgeRight) {
-                    [path moveToPoint:CGPointMake(maxX - scaledCornerRadius, maxY)];
-                    if (scaledCornerRadius > 0) {
-                        UIBezierPath *borderPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(maxX - scaledCornerRadius, CGRectGetMidY(rect))
-                                                                                  radius:CGRectGetHeight(rect) * 0.5
-                                                                              startAngle:M_PI_2
-                                                                                endAngle:M_PI + M_PI_2
-                                                                               clockwise:NO];
-                        [path appendPath:borderPath];
-                    } else {
-                        [path addLineToPoint:CGPointMake(maxX - scaledCornerRadius, minY)];
-                    }
+                    [path moveToPoint:CGPointMake(maxX, maxY)];
+                    [path addLineToPoint:CGPointMake(maxX, minY)];
                 }
             }
             [paths addObject:path];
