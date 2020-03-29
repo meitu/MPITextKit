@@ -144,10 +144,11 @@
                                                                                 attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout],
                                                                                              NSParagraphStyleAttributeName: paragraphStyle,
                                                                                              MPITextBlockBackgroundAttributeName: background}];
+        MPITextLink *bookLink = [MPITextLink linkWithValue:[NSURL URLWithString:@"https://book.douban.com/subject/4884218/"]];
         NSRange bookRange = [quote rangeOfString:@"《我的阿勒泰》"];
         MPITextBackground *linkBackground = [MPITextBackground backgroundWithFillColor:[UIColor colorWithWhite:0.000 alpha:0.220] cornerRadius:3];
         [one addAttribute:MPITextBackgroundAttributeName value:linkBackground range:bookRange];
-        [one addAttribute:MPITextLinkAttributeName value:[MPITextLink new] range:bookRange];
+        [one addAttribute:MPITextLinkAttributeName value:bookLink range:bookRange];
         [one addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] range:bookRange];
         [text appendAttributedString:one];
         [text appendAttributedString:[self padding]];
@@ -203,6 +204,9 @@
     [self showMessage:[NSString stringWithFormat:@"%@: %@",
                        interaction == MPITextItemInteractionTap ? @"Tapped" : @"Long pressed",
                        [attributedText attributedSubstringFromRange:characterRange].string]];
+    if ([link.value isKindOfClass:NSURL.class]) {
+        [UIApplication.sharedApplication openURL:link.value options:@{} completionHandler:nil];
+    }
 }
 
 @end
