@@ -320,6 +320,10 @@ static id<MPITextTruncating> truncaterForAttributes(MPITextRenderAttributes *att
         }
         tokenType = CFStringTokenizerAdvanceToNextToken(tokenizer);
     }
+    
+    CFRelease(tokenizer);
+    CFRelease(locale);
+    
     if (resultRange.location == NSNotFound) {
         resultRange = NSMakeRange(characterIndex, 1);
     }
