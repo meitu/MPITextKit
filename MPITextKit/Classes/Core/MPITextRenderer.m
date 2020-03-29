@@ -291,7 +291,7 @@ static id<MPITextTruncating> truncaterForAttributes(MPITextRenderAttributes *att
     }];
     
     if (self.isTruncated) {
-        if (characterIndex >= self.truncationRange.location) {
+        if (NSLocationInRange(characterIndex, self.truncationRange)) {
             return NSNotFound;
         }
     }
