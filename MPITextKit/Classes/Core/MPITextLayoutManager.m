@@ -127,8 +127,9 @@ typedef NS_ENUM(NSInteger, MPITextBackgroundType) {
     MPITextBackgroundsInfo *normalBackgroundsInfo = [self backgroundsInfoWithBackgroundType:MPITextBackgroundTypeNormal forGlyphRange:glyphsToShow inTextContainer:textContainer];
     MPITextBackgroundsInfo *blockBackgroundsInfo = [self backgroundsInfoWithBackgroundType:MPITextBackgroundTypeBlock forGlyphRange:glyphsToShow inTextContainer:textContainer];
     
-    mergeBackgroundsInfo(normalBackgroundsInfo);
+    // Rendering order: block > normal
     mergeBackgroundsInfo(blockBackgroundsInfo);
+    mergeBackgroundsInfo(normalBackgroundsInfo);
     
     if (backgrounds.count > 0) {
         return [[MPITextBackgroundsInfo alloc] initWithBackgrounds:backgrounds
