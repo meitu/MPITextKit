@@ -263,27 +263,29 @@ typedef NS_ENUM(NSInteger, MPITextBackgroundType) {
     NSMutableArray<MPITextAttachmentInfo *> *attachmentInfos = [NSMutableArray new];
     
     NSRange characterRange = [self characterRangeForGlyphRange:glyphsToShow actualGlyphRange:NULL];
-    [textStorage enumerateAttribute:NSAttachmentAttributeName inRange:characterRange options:kNilOptions usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+    [textStorage enumerateAttribute:NSAttachmentAttributeName inRange:characterRange options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
         if (![value isKindOfClass:MPITextAttachment.class]) {
             return;
         }
         
-        MPITextAttachment *attachment = (MPITextAttachment *)value;
-        
-        NSRange glyphRange = [self glyphRangeForCharacterRange:range actualCharacterRange:NULL];
-        CGRect attachmentFrame = [self boundingRectForGlyphRange:glyphRange inTextContainer:textContainer];
-        CGPoint location = [self locationForGlyphAtIndex:glyphRange.location];
-        
-        // location.y is attachment's frame maxY，this behaviors depends on TextKit and MPITextAttachment implementation.
-        attachmentFrame.origin.y += location.y;
-        attachmentFrame.origin.y -= attachment.attachmentSize.height;
-        attachmentFrame.size.height = attachment.attachmentSize.height;
-        
-        MPITextAttachmentInfo *attachmentInfo = [[MPITextAttachmentInfo alloc] initWithFrame:attachmentFrame
-                                                                              characterIndex:range.location];
-        
-        [attachments addObject:value];
-        [attachmentInfos addObject:attachmentInfo];
+        for (NSUInteger index = range.location; index < NSMaxRange(range); index++) {
+            MPITextAttachment *attachment = (MPITextAttachment *)value;
+            
+            NSRange glyphRange = [self glyphRangeForCharacterRange:NSMakeRange(index, 1) actualCharacterRange:NULL];
+            CGRect attachmentFrame = [self boundingRectForGlyphRange:glyphRange inTextContainer:textContainer];
+            CGPoint location = [self locationForGlyphAtIndex:glyphRange.location];
+            
+            // location.y is attachment's frame maxY，this behaviors depends on TextKit and MPITextAttachment implementation.
+            attachmentFrame.origin.y += location.y;
+            attachmentFrame.origin.y -= attachment.attachmentSize.height;
+            attachmentFrame.size.height = attachment.attachmentSize.height;
+            
+            MPITextAttachmentInfo *attachmentInfo = [[MPITextAttachmentInfo alloc] initWithFrame:attachmentFrame
+                                                                                  characterIndex:range.location];
+            
+            [attachments addObject:value];
+            [attachmentInfos addObject:attachmentInfo];
+        }
     }];
     
     if (attachments.count > 0) {

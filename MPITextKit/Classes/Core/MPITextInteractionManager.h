@@ -13,6 +13,7 @@
 #import "MPITextKitConst.h"
 #endif
 
+@class MPITextRenderer;
 @class MPITextInteractiveGestureRecognizer;
 
 @protocol MPITextInteractionManagerDelegate;
@@ -22,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MPITextInteractable <NSObject>
 
 @property (nullable, readonly) NSAttributedString *attributedText;
+
+@property (nullable, nonatomic, strong) MPITextRenderer *textRenderer;
 
 @property (nullable, readonly) NSAttributedString *truncationAttributedText;
 

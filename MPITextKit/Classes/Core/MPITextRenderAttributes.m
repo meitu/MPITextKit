@@ -13,8 +13,7 @@
 
 @implementation MPITextRenderAttributes
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _lineBreakMode = NSLineBreakByTruncatingTail;
@@ -55,6 +54,18 @@
     _lineBreakMode == object.lineBreakMode &&
     _maximumNumberOfLines == object.maximumNumberOfLines &&
     MPITextObjectIsEqual(_truncationAttributedText, object.truncationAttributedText);
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone {
+    typeof(self) one = [[self.class allocWithZone:zone] init];
+    one.attributedText = self.attributedText;
+    one.exclusionPaths = self.exclusionPaths;
+    one.lineBreakMode = self.lineBreakMode;
+    one.maximumNumberOfLines = self.maximumNumberOfLines;
+    one.truncationAttributedText = self.truncationAttributedText;
+    return one;
 }
 
 @end

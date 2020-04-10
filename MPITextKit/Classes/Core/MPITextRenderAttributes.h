@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPITextRenderAttributes : NSObject
+@interface MPITextRenderAttributes : NSObject <NSCopying>
 
 /**
  Default is nil.

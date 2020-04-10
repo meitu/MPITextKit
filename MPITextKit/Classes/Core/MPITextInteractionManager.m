@@ -11,6 +11,8 @@
 #import "MPITextEffectWindow.h"
 #import "MPITextMagnifier.h"
 #import "MPITextLink.h"
+#import "MPITextRenderAttributes.h"
+#import "MPITextRenderer.h"
 
 #import "NSAttributedString+MPITextKit.h"
 
@@ -328,7 +330,12 @@
 
 - (NSAttributedString *)attributedText {
     MPITextInteractableView *interactableView = self.interactableView;
-    return self.activeInTruncation ? interactableView.truncationAttributedText : interactableView.attributedText;
+    if (interactableView.textRenderer) {
+        MPITextRenderAttributes *renderAttributes = [interactableView.textRenderer copyRenderAttributes];
+        return self.activeInTruncation ? renderAttributes.truncationAttributedText : renderAttributes.attributedText;
+    } else {
+        return self.activeInTruncation ? interactableView.truncationAttributedText : interactableView.attributedText;
+    }
 }
 
 - (UIPanGestureRecognizer *)grabberPanGestureRecognizer {
