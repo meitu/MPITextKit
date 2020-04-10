@@ -23,7 +23,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) one = [self.class new];
+    typeof(self) one = [[self.class allocWithZone:zone] init];
     one.string = self.string;
     return one;
 }

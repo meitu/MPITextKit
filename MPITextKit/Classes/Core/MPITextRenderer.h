@@ -18,13 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPITextRenderer : NSObject
 
+@property (nonatomic, assign, readonly) CGSize constrainedSize;
+
 /**
  Stored attachments info and it's useful for drawing.
  */
 @property (nullable, nonatomic, strong, readonly) MPITextAttachmentsInfo *attachmentsInfo;
 
-- (instancetype)initWithTextKitAttributes:(MPITextRenderAttributes *)attributes
-                          constrainedSize:(CGSize)constrainedSize;
+- (instancetype)initWithRenderAttributes:(MPITextRenderAttributes *)renderAttributes
+                         constrainedSize:(CGSize)constrainedSize;
 
 /**
  The render's size.
@@ -38,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The text truncation range if text if truncated.
 - (NSRange)truncationRange;
+
+/// Copy the render attributes.
+- (MPITextRenderAttributes *)copyRenderAttributes;
 
 /**
  Draw everything without view and layer for given point.

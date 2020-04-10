@@ -29,20 +29,20 @@ static MPITextCache *sharedTruncaterCache()
     return truncaterCache;
 }
 
-static id<MPITextTruncating> truncaterForAttributes(MPITextRenderAttributes *attributes) {
+static id<MPITextTruncating> truncaterForRenderAttributes(MPITextRenderAttributes *renderAttributes) {
     // Currently only tail is supported.
-    if (attributes.lineBreakMode != NSLineBreakByTruncatingTail) {
+    if (renderAttributes.lineBreakMode != NSLineBreakByTruncatingTail) {
         return nil;
     }
     
     MPITextCache *cache = sharedTruncaterCache();
     
-    MPITextRendererKey *key = [[MPITextRendererKey alloc] initWithAttributes:attributes constrainedSize:MPITextContainerMaxSize];
+    MPITextRendererKey *key = [[MPITextRendererKey alloc] initWithAttributes:renderAttributes constrainedSize:MPITextContainerMaxSize];
     
     id<MPITextTruncating> truncater = [cache objectForKey:key];
     if (truncater == nil) {
-        if (attributes.lineBreakMode == NSLineBreakByTruncatingTail) {
-            truncater = [[MPITextTailTruncater alloc] initWithTruncationAttributedString:attributes.attributedText avoidTailTruncationSet:MPITextDefaultAvoidTruncationCharacterSet()];
+        if (renderAttributes.lineBreakMode == NSLineBreakByTruncatingTail) {
+            truncater = [[MPITextTailTruncater alloc] initWithTruncationAttributedString:renderAttributes.attributedText avoidTailTruncationSet:MPITextDefaultAvoidTruncationCharacterSet()];
         }
         if (truncater) {
             [cache setObject:truncater forKey:key];
@@ -56,8 +56,7 @@ static id<MPITextTruncating> truncaterForAttributes(MPITextRenderAttributes *att
 
 @property (nonatomic, strong) MPITextKitContext *context;
 
-@property (nonatomic, strong) MPITextRenderAttributes *attributes;
-@property (nonatomic, assign) CGSize constrainedSize;
+@property (nonatomic, strong) MPITextRenderAttributes *renderAttributes;
 @property (nonatomic, assign) CGSize calculatedSize;
 
 @property (nonatomic, strong) MPITextTruncationInfo *truncationInfo;
@@ -71,22 +70,22 @@ static id<MPITextTruncating> truncaterForAttributes(MPITextRenderAttributes *att
 
 @implementation MPITextRenderer
 
-- (instancetype)initWithTextKitAttributes:(MPITextRenderAttributes *)attributes constrainedSize:(CGSize)constrainedSize {
+- (instancetype)initWithRenderAttributes:(MPITextRenderAttributes *)renderAttributes constrainedSize:(CGSize)constrainedSize {
     self = [super init];
     if (self) {
-        _attributes = attributes;
+        _renderAttributes = renderAttributes;
         _constrainedSize = constrainedSize;
         
         // TextKit render incorrect by truncating. eg. text = @"/a/n/n/nb", maximumNumberOfLines = 2.
-        NSLineBreakMode lineBreakMode = attributes.lineBreakMode;
+        NSLineBreakMode lineBreakMode = renderAttributes.lineBreakMode;
         if (lineBreakMode == NSLineBreakByTruncatingTail) {
             lineBreakMode = NSLineBreakByWordWrapping;
         }
         
-        _context = [[MPITextKitContext alloc] initWithAttributedString:attributes.attributedText
+        _context = [[MPITextKitContext alloc] initWithAttributedString:renderAttributes.attributedText
                                                          lineBreakMode:lineBreakMode
-                                                  maximumNumberOfLines:attributes.maximumNumberOfLines
-                                                        exclusionPaths:attributes.exclusionPaths
+                                                  maximumNumberOfLines:renderAttributes.maximumNumberOfLines
+                                                        exclusionPaths:renderAttributes.exclusionPaths
                                                        constrainedSize:constrainedSize];
         
         [self calculateSize];
@@ -100,15 +99,15 @@ static id<MPITextTruncating> truncaterForAttributes(MPITextRenderAttributes *att
 - (void)calculateSize {
     __block CGRect boundingRect;
     __block MPITextTruncationInfo *truncationInfo = nil;
-    MPITextRenderAttributes *attributes = self.attributes;
+    MPITextRenderAttributes *renderAttributes = self.renderAttributes;
     [self.context performBlockWithLockedTextKitComponents:^(MPITextLayoutManager *layoutManager, NSTextStorage *textStorage, NSTextContainer *textContainer) {
         [layoutManager ensureLayoutForTextContainer:textContainer];
         boundingRect = [layoutManager usedRectForTextContainer:textContainer];
         
         MPITextRenderAttributes *truncationRenderAttributes = [MPITextRenderAttributes new];
-        truncationRenderAttributes.attributedText = attributes.truncationAttributedText;
-        truncationRenderAttributes.lineBreakMode = attributes.lineBreakMode;
-        id<MPITextTruncating> truncater = truncaterForAttributes(truncationRenderAttributes);
+        truncationRenderAttributes.attributedText = renderAttributes.truncationAttributedText;
+        truncationRenderAttributes.lineBreakMode = renderAttributes.lineBreakMode;
+        id<MPITextTruncating> truncater = truncaterForRenderAttributes(truncationRenderAttributes);
         if (truncater) {
             truncationInfo =
             [truncater truncateWithLayoutManager:layoutManager
@@ -191,6 +190,10 @@ static id<MPITextTruncating> truncaterForAttributes(MPITextRenderAttributes *att
         return [self.truncationInfo.truncationCharacterRange rangeValue];
     }
     return NSMakeRange(NSNotFound, 0);
+}
+
+- (MPITextRenderAttributes *)copyRenderAttributes {
+    return self.renderAttributes.copy;
 }
 
 - (void)drawAtPoint:(CGPoint)point debugOption:(MPITextDebugOption *)debugOption {

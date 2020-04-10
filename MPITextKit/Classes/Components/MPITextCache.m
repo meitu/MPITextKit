@@ -8,10 +8,9 @@
 
 #import "MPITextCache.h"
 #import <CoreFoundation/CoreFoundation.h>
-#import <QuartzCore/QuartzCore.h>
 #import <pthread.h>
 
-static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
+static inline dispatch_queue_t MPITextMemoryCacheGetReleaseQueue() {
     return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
 }
 
@@ -151,7 +150,7 @@ static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
         _dic = CFDictionaryCreateMutable(CFAllocatorGetDefault(), 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
         
         if (_releaseAsynchronously) {
-            dispatch_queue_t queue = _releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+            dispatch_queue_t queue = _releaseOnMainThread ? dispatch_get_main_queue() : MPITextMemoryCacheGetReleaseQueue();
             dispatch_async(queue, ^{
                 CFRelease(holder); // hold and release in specified queue
             });
@@ -220,7 +219,7 @@ static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
         }
     }
     if (holder.count) {
-        dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+        dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : MPITextMemoryCacheGetReleaseQueue();
         dispatch_async(queue, ^{
             [holder count]; // release in queue
         });
@@ -254,7 +253,7 @@ static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
         }
     }
     if (holder.count) {
-        dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+        dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : MPITextMemoryCacheGetReleaseQueue();
         dispatch_async(queue, ^{
             [holder count]; // release in queue
         });
@@ -289,7 +288,7 @@ static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
         }
     }
     if (holder.count) {
-        dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+        dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : MPITextMemoryCacheGetReleaseQueue();
         dispatch_async(queue, ^{
             [holder count]; // release in queue
         });
@@ -401,8 +400,9 @@ static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
         node->_time = CACurrentMediaTime();
         [_lru bringNodeToHead:node];
     }
+    id value = node ? node->_value : nil;
     pthread_mutex_unlock(&_lock);
-    return node ? node->_value : nil;
+    return value;
 }
 
 - (void)setObject:(id)object forKey:(id)key {
@@ -441,7 +441,7 @@ static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
     if (_lru->_totalCount > _countLimit) {
         _MPILinkedMapNode *node = [_lru removeTailNode];
         if (_lru->_releaseAsynchronously) {
-            dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+            dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : MPITextMemoryCacheGetReleaseQueue();
             dispatch_async(queue, ^{
                 [node class]; //hold and release in queue
             });
@@ -461,7 +461,7 @@ static inline dispatch_queue_t YYMemoryCacheGetReleaseQueue() {
     if (node) {
         [_lru removeNode:node];
         if (_lru->_releaseAsynchronously) {
-            dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+            dispatch_queue_t queue = _lru->_releaseOnMainThread ? dispatch_get_main_queue() : MPITextMemoryCacheGetReleaseQueue();
             dispatch_async(queue, ^{
                 [node class]; //hold and release in queue
             });

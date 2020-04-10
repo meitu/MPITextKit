@@ -57,7 +57,7 @@ static MPITextRenderer *rendererForAttributes(MPITextRenderAttributes *attribute
     
     MPITextRenderer *renderer = [cache objectForKey:key];
     if (renderer == nil) {
-        renderer = [[MPITextRenderer alloc] initWithTextKitAttributes:attributes constrainedSize:constrainedSize];
+        renderer = [[MPITextRenderer alloc] initWithRenderAttributes:attributes constrainedSize:constrainedSize];
         [cache setObject:renderer forKey:key];
     }
     
@@ -155,7 +155,7 @@ CGSize MPITextSuggestFrameSizeForAttributes(MPITextRenderAttributes *attributes,
     if (textSizeValue) {
         textSize = textSizeValue.CGSizeValue;
     } else {
-        renderer = [[MPITextRenderer alloc] initWithTextKitAttributes:attributes constrainedSize:constrainedSize];
+        renderer = [[MPITextRenderer alloc] initWithRenderAttributes:attributes constrainedSize:constrainedSize];
         textSize = renderer.size;
         
         cacheTextSizeForKey(key, textSize);
@@ -277,13 +277,6 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
 }
 
 - (CGSize)intrinsicContentSize {
-    if (self.textRenderer) {
-        return CGSizeMake(self.textRenderer.size.width +
-                          MPITextUIEdgeInsetsGetHorizontalValue(self.textContainerInset),
-                          self.textRenderer.size.height +
-                          MPITextUIEdgeInsetsGetVerticalValue(self.textContainerInset));
-    }
-    
     CGFloat width = CGRectGetWidth(self.frame);
     if (self.numberOfLines == 1) {
         width = MPITextContainerMaxSize.width;
@@ -298,6 +291,13 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
+    if (self.textRenderer) {
+        return CGSizeMake(self.textRenderer.size.width +
+                          MPITextUIEdgeInsetsGetHorizontalValue(self.textContainerInset),
+                          self.textRenderer.size.height +
+                          MPITextUIEdgeInsetsGetVerticalValue(self.textContainerInset));
+    }
+    
     MPITextRenderAttributes *renderAttributes = [self renderAttributes];
     if (CGSizeEqualToSize(self.bounds.size, size)) { // sizeToFit called.
         size.height = MPITextContainerMaxSize.height;
@@ -470,6 +470,71 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     }
 }
 
+- (MPITextRenderAttributes *)renderAttributes {
+    BOOL hasActiveLink = self.interactionManager.hasActiveLink;
+    BOOL activeInTruncation = self.interactionManager.activeInTruncation;
+    NSAttributedString *highlightedAttributedText = self.interactionManager.highlightedAttributedText;
+    
+    MPITextRenderAttributes *attributes = nil;
+    if (self.textRenderer) {
+        attributes = [self.textRenderer copyRenderAttributes];
+        if (hasActiveLink) {
+            if (!activeInTruncation) {
+                attributes.attributedText = highlightedAttributedText;
+            } else {
+                attributes.truncationAttributedText = highlightedAttributedText;
+            }
+        }
+    } else {
+        attributes = [MPITextRenderAttributes new];
+        attributes.lineBreakMode = self.lineBreakMode;
+        attributes.maximumNumberOfLines = self.numberOfLines;
+        attributes.exclusionPaths = self.exclusionPaths;
+        if (hasActiveLink && !activeInTruncation) {
+            attributes.attributedText = highlightedAttributedText;
+        } else {
+            attributes.attributedText = self.attributedText;
+        }
+        if (hasActiveLink && activeInTruncation) {
+            attributes.truncationAttributedText = highlightedAttributedText;
+        } else {
+           attributes.truncationAttributedText = self.truncationAttributedText;
+        }
+    }
+    return attributes;
+}
+
+- (MPITextRenderer *)currentRenderer {
+    MPITextRenderer *renderer = nil;
+    BOOL hasActiveLink = self.interactionManager.hasActiveLink;
+    if (self.textRenderer) {
+        CGSize textContainerSize = self.textRenderer.constrainedSize;
+        if (hasActiveLink) {
+            MPITextRenderAttributes *renderAttributes = [self renderAttributes];
+            renderer = [[MPITextRenderer alloc] initWithRenderAttributes:renderAttributes constrainedSize:textContainerSize];
+        } else {
+            renderer = self.textRenderer;
+        }
+    } else {
+        MPITextRenderAttributes *renderAttributes = [self renderAttributes];
+        CGSize textContainerSize = [self calculateTextContainerSize];
+        if (hasActiveLink) {
+            renderer = [[MPITextRenderer alloc] initWithRenderAttributes:renderAttributes constrainedSize:textContainerSize];
+        } else {
+            renderer = rendererForAttributes(renderAttributes, textContainerSize);
+        }
+    }
+    return renderer;
+}
+
+#pragma mark - Geometry
+
+- (CGSize)calculateTextContainerSize {
+    CGRect frame = UIEdgeInsetsInsetRect(self.frame, self.textContainerInset);
+    CGSize constrainedSize = frame.size;
+    return constrainedSize;
+}
+
 - (CGRect)textRectForBounds:(CGRect)bounds textSize:(CGSize)textSize {
     CGRect textRect = UIEdgeInsetsInsetRect(bounds, self.textContainerInset);
     
@@ -490,59 +555,6 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     }
     
     return textRect;
-}
-
-- (CGSize)calculateTextContainerSize {
-    CGRect frame = UIEdgeInsetsInsetRect(self.frame, self.textContainerInset);
-    CGSize constrainedSize = frame.size;
-    return constrainedSize;
-}
-
-- (MPITextRenderAttributes *)renderAttributes {
-    MPITextRenderAttributes *attributes = [MPITextRenderAttributes new];
-    if (self.interactionManager.hasActiveLink && !self.interactionManager.activeInTruncation) {
-        attributes.attributedText = self.interactionManager.highlightedAttributedText;
-    } else {
-        attributes.attributedText = self.attributedText;
-    }
-    attributes.lineBreakMode = self.lineBreakMode;
-    attributes.maximumNumberOfLines = self.numberOfLines;
-    attributes.exclusionPaths = self.exclusionPaths;
-    if (self.interactionManager.hasActiveLink && self.interactionManager.activeInTruncation) {
-        attributes.truncationAttributedText = self.interactionManager.highlightedAttributedText;
-    } else {
-        attributes.truncationAttributedText = self.truncationAttributedText;
-    }
-    return attributes;
-}
-
-- (MPITextRenderer *)currentRenderer {
-    MPITextRenderer *renderer = nil;
-    BOOL hasActiveLink = self.interactionManager.hasActiveLink;
-    if (self.textRenderer && !hasActiveLink) {
-        renderer = self.textRenderer;
-    } else {
-        MPITextRenderAttributes *renderAttributes = [self renderAttributes];
-        CGSize textContainerSize = [self calculateTextContainerSize];
-        if (hasActiveLink) {
-            renderer = [[MPITextRenderer alloc] initWithTextKitAttributes:renderAttributes constrainedSize:textContainerSize];
-        } else {
-            renderer = rendererForAttributes(renderAttributes, textContainerSize);
-        }
-    }
-    return renderer;
-}
-
-#pragma mark - Geometry
-
-- (CGPoint)convertPointToTextKit:(CGPoint)point forBounds:(CGRect)bounds {
-    MPITextRenderer *renderer = [self currentRenderer];
-    return [self convertPointToTextKit:point forBounds:bounds textSize:renderer.size];
-}
-
-- (CGPoint)convertPointFromTextKit:(CGPoint)point forBounds:(CGRect)bounds {
-    MPITextRenderer *renderer = [self currentRenderer];
-    return [self convertPointFromTextKit:point forBounds:bounds textSize:renderer.size];
 }
 
 - (CGPoint)convertPointToTextKit:(CGPoint)point forBounds:(CGRect)bounds textSize:(CGSize)textSize {
@@ -733,7 +745,7 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
 
 - (void)beginSelectionAtPoint:(CGPoint)point; {
     MPITextRenderer *renderer = [self currentRenderer];
-    NSUInteger characterIndex = [renderer characterIndexForPoint:[self convertPointToTextKit:point forBounds:self.bounds]];
+    NSUInteger characterIndex = [renderer characterIndexForPoint:[self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size]];
     if (characterIndex == NSNotFound) {
         return;
     }
@@ -1102,10 +1114,12 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
         return;
     }
     
+    CGRect textRect = [self textRectForBounds:self.bounds textSize:[self currentRenderer].size];
+    
     _exclusionPaths = exclusionPaths.copy;
     
     [_exclusionPaths enumerateObjectsUsingBlock:^(UIBezierPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj applyTransform:CGAffineTransformMakeTranslation(-self.textContainerInset.left, -self.textContainerInset.top)];
+        [obj applyTransform:CGAffineTransformMakeTranslation(-textRect.origin.x, -textRect.origin.y)];
     }];
     
     [self invalidate];
