@@ -29,9 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param token The truncation token string used when text is truncated.
 /// @param additionalMessage The second attributed string appended for truncation.
 FOUNDATION_EXPORT
-NSAttributedString *MPITextTruncationAttributedTextWithTokenAndAdditionalMessage(NSAttributedString *attributedText,
-                                                                                 NSAttributedString *token,
-                                                                                 NSAttributedString *additionalMessage);
+NSAttributedString *MPITextTruncationAttributedTextWithTokenAndAdditionalMessage(NSAttributedString * _Nullable attributedText,
+                                                                                 NSAttributedString * _Nullable token,
+                                                                                 NSAttributedString * _Nullable additionalMessage);
 
 /**
  Calculate the text view size. This method can warms up the cache.
