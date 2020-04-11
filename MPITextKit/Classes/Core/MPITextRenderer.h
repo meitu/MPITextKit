@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPITextRenderer : NSObject
 
-@property (nonatomic, strong) MPITextRenderAttributes *renderAttributes;
+@property (nonatomic, strong, readonly) MPITextRenderAttributes *renderAttributes;
 @property (nonatomic, assign, readonly) CGSize constrainedSize;
 
 /**
