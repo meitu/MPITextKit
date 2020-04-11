@@ -60,8 +60,17 @@
 
 @implementation MPITextRenderAttributesBuilder
 
-- (instancetype)initWithRenderAttributes:(MPITextRenderAttributes *)renderAttributes {
+- (instancetype)init {
     self = [super init];
+    if (self) {
+        _lineBreakMode = NSLineBreakByTruncatingTail;
+        _maximumNumberOfLines = 1;
+    }
+    return self;
+}
+
+- (instancetype)initWithRenderAttributes:(MPITextRenderAttributes *)renderAttributes {
+    self = [self init];
     if (self) {
         _attributedText = renderAttributes.attributedText;
         _exclusionPaths = renderAttributes.exclusionPaths;
