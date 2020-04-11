@@ -475,33 +475,33 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     BOOL activeInTruncation = self.interactionManager.activeInTruncation;
     NSAttributedString *highlightedAttributedText = self.interactionManager.highlightedAttributedText;
     
-    MPITextRenderAttributes *attributes = nil;
+    MPITextRenderAttributesBuilder *attributesBuilder = nil;
     if (self.textRenderer) {
-        attributes = [self.textRenderer copyRenderAttributes];
+        attributesBuilder = [[MPITextRenderAttributesBuilder alloc] initWithRenderAttributes:self.textRenderer.renderAttributes];
         if (hasActiveLink) {
             if (!activeInTruncation) {
-                attributes.attributedText = highlightedAttributedText;
+                attributesBuilder.attributedText = highlightedAttributedText;
             } else {
-                attributes.truncationAttributedText = highlightedAttributedText;
+                attributesBuilder.truncationAttributedText = highlightedAttributedText;
             }
         }
     } else {
-        attributes = [MPITextRenderAttributes new];
-        attributes.lineBreakMode = self.lineBreakMode;
-        attributes.maximumNumberOfLines = self.numberOfLines;
-        attributes.exclusionPaths = self.exclusionPaths;
+        attributesBuilder = [MPITextRenderAttributesBuilder new];
+        attributesBuilder.lineBreakMode = self.lineBreakMode;
+        attributesBuilder.maximumNumberOfLines = self.numberOfLines;
+        attributesBuilder.exclusionPaths = self.exclusionPaths;
         if (hasActiveLink && !activeInTruncation) {
-            attributes.attributedText = highlightedAttributedText;
+            attributesBuilder.attributedText = highlightedAttributedText;
         } else {
-            attributes.attributedText = self.attributedText;
+            attributesBuilder.attributedText = self.attributedText;
         }
         if (hasActiveLink && activeInTruncation) {
-            attributes.truncationAttributedText = highlightedAttributedText;
+            attributesBuilder.truncationAttributedText = highlightedAttributedText;
         } else {
-           attributes.truncationAttributedText = self.truncationAttributedText;
+           attributesBuilder.truncationAttributedText = self.truncationAttributedText;
         }
     }
-    return attributes;
+    return [attributesBuilder build];
 }
 
 - (MPITextRenderer *)currentRenderer {

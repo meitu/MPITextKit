@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPITextRenderer : NSObject
 
+@property (nonatomic, strong, readonly) MPITextRenderAttributes *renderAttributes;
 @property (nonatomic, assign, readonly) CGSize constrainedSize;
 
 /**
@@ -40,9 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The text truncation range if text if truncated.
 - (NSRange)truncationRange;
-
-/// Copy the render attributes.
-- (MPITextRenderAttributes *)copyRenderAttributes;
 
 /**
  Draw everything without view and layer for given point.

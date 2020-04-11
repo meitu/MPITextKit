@@ -46,14 +46,15 @@
                                                                            NSStrokeColorAttributeName: [UIColor redColor],
                                                                            NSStrokeWidthAttributeName: @(-3),
                                                                            }];
+        
         [strings addObject:text];
         
-        MPITextRenderAttributes *attributes = [[MPITextRenderAttributes alloc] init];
-        attributes.attributedText = text;
-        attributes.lineBreakMode = NSLineBreakByTruncatingTail;
-        attributes.maximumNumberOfLines = 3;
-        attributes.truncationAttributedText = MPITextDefaultTruncationAttributedToken();
-        MPITextRenderer *renderer = [[MPITextRenderer alloc] initWithRenderAttributes:attributes constrainedSize:CGSizeMake(CGRectGetWidth(self.view.frame), CGFLOAT_MAX)];
+        MPITextRenderAttributesBuilder *attributesBuiler = [[MPITextRenderAttributesBuilder alloc] init];
+        attributesBuiler.attributedText = text;
+        attributesBuiler.lineBreakMode = NSLineBreakByTruncatingTail;
+        attributesBuiler.maximumNumberOfLines = 3;
+        attributesBuiler.truncationAttributedText = MPITextDefaultTruncationAttributedToken();
+        MPITextRenderer *renderer = [[MPITextRenderer alloc] initWithRenderAttributes:[attributesBuiler build] constrainedSize:CGSizeMake(CGRectGetWidth(self.view.frame), CGFLOAT_MAX)];
         [textRenderers addObject:renderer];
     }
     self.strings = strings;

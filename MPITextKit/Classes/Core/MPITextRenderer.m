@@ -56,7 +56,6 @@ static id<MPITextTruncating> truncaterForRenderAttributes(MPITextRenderAttribute
 
 @property (nonatomic, strong) MPITextKitContext *context;
 
-@property (nonatomic, strong) MPITextRenderAttributes *renderAttributes;
 @property (nonatomic, assign) CGSize calculatedSize;
 
 @property (nonatomic, strong) MPITextTruncationInfo *truncationInfo;
@@ -104,9 +103,11 @@ static id<MPITextTruncating> truncaterForRenderAttributes(MPITextRenderAttribute
         [layoutManager ensureLayoutForTextContainer:textContainer];
         boundingRect = [layoutManager usedRectForTextContainer:textContainer];
         
-        MPITextRenderAttributes *truncationRenderAttributes = [MPITextRenderAttributes new];
-        truncationRenderAttributes.attributedText = renderAttributes.truncationAttributedText;
-        truncationRenderAttributes.lineBreakMode = renderAttributes.lineBreakMode;
+        MPITextRenderAttributesBuilder *truncationRenderAttributesBuilder = [MPITextRenderAttributesBuilder new];
+        truncationRenderAttributesBuilder.attributedText = renderAttributes.truncationAttributedText;
+        truncationRenderAttributesBuilder.lineBreakMode = renderAttributes.lineBreakMode;
+        MPITextRenderAttributes *truncationRenderAttributes = [[MPITextRenderAttributes alloc] initWithBuilder:truncationRenderAttributesBuilder];
+        
         id<MPITextTruncating> truncater = truncaterForRenderAttributes(truncationRenderAttributes);
         if (truncater) {
             truncationInfo =
