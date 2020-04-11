@@ -56,16 +56,40 @@
     MPITextObjectIsEqual(_truncationAttributedText, object.truncationAttributedText);
 }
 
-#pragma mark - NSCopying
+@end
 
-- (id)copyWithZone:(NSZone *)zone {
-    typeof(self) one = [[self.class allocWithZone:zone] init];
-    one.attributedText = self.attributedText;
-    one.exclusionPaths = self.exclusionPaths;
-    one.lineBreakMode = self.lineBreakMode;
-    one.maximumNumberOfLines = self.maximumNumberOfLines;
-    one.truncationAttributedText = self.truncationAttributedText;
-    return one;
+@implementation MPITextRenderAttributesBuilder
+
+- (instancetype)initWithRenderAttributes:(MPITextRenderAttributes *)renderAttributes {
+    self = [super init];
+    if (self) {
+        _attributedText = renderAttributes.attributedText;
+        _exclusionPaths = renderAttributes.exclusionPaths;
+        _lineBreakMode = renderAttributes.lineBreakMode;
+        _maximumNumberOfLines = renderAttributes.maximumNumberOfLines;
+        _truncationAttributedText = renderAttributes.truncationAttributedText;
+    }
+    return self;
+}
+
+- (MPITextRenderAttributes *)build {
+    return [[MPITextRenderAttributes alloc] initWithBuilder:self];
+}
+
+@end
+
+@implementation MPITextRenderAttributes (MPITextBuilderAdditions)
+
+- (instancetype)initWithBuilder:(MPITextRenderAttributesBuilder *)builder {
+    self = [super init];
+    if (self) {
+        _attributedText = builder.attributedText;
+        _exclusionPaths = builder.exclusionPaths;
+        _lineBreakMode = builder.lineBreakMode;
+        _maximumNumberOfLines = builder.maximumNumberOfLines;
+        _truncationAttributedText = builder.truncationAttributedText;
+    }
+    return self;
 }
 
 @end

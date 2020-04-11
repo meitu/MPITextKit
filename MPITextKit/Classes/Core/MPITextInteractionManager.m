@@ -331,7 +331,7 @@
 - (NSAttributedString *)attributedText {
     MPITextInteractableView *interactableView = self.interactableView;
     if (interactableView.textRenderer) {
-        MPITextRenderAttributes *renderAttributes = [interactableView.textRenderer copyRenderAttributes];
+        MPITextRenderAttributes *renderAttributes = interactableView.textRenderer.renderAttributes;
         return self.activeInTruncation ? renderAttributes.truncationAttributedText : renderAttributes.attributedText;
     } else {
         return self.activeInTruncation ? interactableView.truncationAttributedText : interactableView.attributedText;

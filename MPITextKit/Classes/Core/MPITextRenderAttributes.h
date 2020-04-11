@@ -10,7 +10,36 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPITextRenderAttributes : NSObject <NSCopying>
+@interface MPITextRenderAttributes : NSObject
+
+/**
+ Default is nil.
+ */
+@property (nullable, nonatomic, readonly) NSAttributedString *attributedText;
+
+/**
+ Default is NSLineBreakByTruncatingTail.
+ */
+@property (nonatomic, readonly) NSLineBreakMode lineBreakMode;
+
+/**
+ Default is 1.
+ */
+@property (nonatomic, readonly) NSUInteger maximumNumberOfLines;
+
+/**
+ Default is nil.
+ */
+@property (nullable, nonatomic, readonly) NSArray<UIBezierPath *> *exclusionPaths;
+
+/**
+ Default is nil.
+ */
+@property (nullable, nonatomic, readonly) NSAttributedString *truncationAttributedText;
+
+@end
+
+@interface MPITextRenderAttributesBuilder : NSObject
 
 /**
  Default is nil.
@@ -37,6 +66,16 @@ NS_ASSUME_NONNULL_BEGIN
  Note: You should use MPITextTruncationAttributedTextWithTokenAndAdditionalMessage() to get it.
  */
 @property (nullable, nonatomic, strong) NSAttributedString *truncationAttributedText;
+
+- (instancetype)initWithRenderAttributes:(MPITextRenderAttributes *)renderAttributes;
+
+- (MPITextRenderAttributes *)build;
+
+@end
+
+@interface MPITextRenderAttributes (MPITextBuilderAdditions)
+
+- (instancetype)initWithBuilder:(MPITextRenderAttributesBuilder *)builder;
 
 @end
 

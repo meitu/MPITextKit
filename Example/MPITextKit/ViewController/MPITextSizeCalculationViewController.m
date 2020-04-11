@@ -33,11 +33,11 @@
     // You can change it for testing
     NSUInteger numberOfLines = 5;
      
-    MPITextRenderAttributes *renderAttributes = [MPITextRenderAttributes new];
-    renderAttributes.attributedText = attributedText;
-    renderAttributes.truncationAttributedText = truncationAttriubtedText;
-    renderAttributes.maximumNumberOfLines = numberOfLines;
-    CGSize textSize = MPITextSuggestFrameSizeForAttributes(renderAttributes, fitsSize, UIEdgeInsetsZero);
+    MPITextRenderAttributesBuilder *renderAttributesBuilder = [MPITextRenderAttributesBuilder new];
+    renderAttributesBuilder.attributedText = attributedText;
+    renderAttributesBuilder.truncationAttributedText = truncationAttriubtedText;
+    renderAttributesBuilder.maximumNumberOfLines = numberOfLines;
+    CGSize textSize = MPITextSuggestFrameSizeForAttributes([renderAttributesBuilder build], fitsSize, UIEdgeInsetsZero);
     
     MPILabel *label = [MPILabel new];
     label.attributedText = attributedText;
