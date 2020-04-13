@@ -110,15 +110,18 @@
     NSUInteger characterIndex = [interactableView characterIndexForPoint:location];
     NSUInteger pinnedGrabberIndex = self.pinnedGrabberIndex;
     NSRange selectedRange = interactableView.selectedRange;
+    BOOL isStartGrabber = grabberType == MPITextSelectionGrabberTypeStart;
     if (characterIndex != NSNotFound) {
         if (characterIndex < pinnedGrabberIndex) {
             selectedRange = NSMakeRange(characterIndex,
-                                        pinnedGrabberIndex - characterIndex + (grabberType == MPITextSelectionGrabberTypeStart ? 1 : 0));
+                                        pinnedGrabberIndex - characterIndex + (isStartGrabber ? 1 : 0));
         } else if (characterIndex > pinnedGrabberIndex) {
-            selectedRange = NSMakeRange(grabberType == MPITextSelectionGrabberTypeStart ? pinnedGrabberIndex + 1 : pinnedGrabberIndex,
-                                        characterIndex - pinnedGrabberIndex + (grabberType == MPITextSelectionGrabberTypeEnd ? 1 : 0));
+            NSUInteger location = isStartGrabber ? pinnedGrabberIndex + 1 : pinnedGrabberIndex;
+            selectedRange = NSMakeRange(location,
+                                        characterIndex - location);
         } else {
-            selectedRange = NSMakeRange(grabberType == MPITextSelectionGrabberTypeStart ? pinnedGrabberIndex : pinnedGrabberIndex - 1, 1);
+            selectedRange = NSMakeRange(pinnedGrabberIndex,
+                                        isStartGrabber ? 1 : 0);
         }
     }
     
