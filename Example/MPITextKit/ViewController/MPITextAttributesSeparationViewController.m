@@ -81,7 +81,7 @@
     MPITextAttachment *attach2 = [MPITextAttachment new];
     attach2.content = image;
     NSMutableAttributedString *attachText2 = [[NSAttributedString attributedStringWithAttachment:attach2] mutableCopy];
-    [attachText2 addAttribute:MPITextBackedStringAttributeName value:[MPITextBackedString stringWithString:@"[dribbble]"] range:attachText1.mpi_rangeOfAll];
+    [attachText2 addAttribute:MPITextBackedStringAttributeName value:[MPITextBackedString stringWithString:@"[dribbble]"] range:attachText2.mpi_rangeOfAll];
     /** Notice:
      - attach1 is equal to attach2
      - entity1 is *not* equal to entity2
