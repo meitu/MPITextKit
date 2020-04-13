@@ -8,7 +8,7 @@
 
 #import "MPITextSelectionViewController.h"
 #import "MPIExampleHelper.h"
-@import MPITextKit;
+#import <MPITextKit.h>
 
 @interface MPITextSelectionLabel : MPILabel
 

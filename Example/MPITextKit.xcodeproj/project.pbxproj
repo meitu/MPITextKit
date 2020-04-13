@@ -22,6 +22,7 @@
 		3D0594A522519E73009AF8AB /* MPITextExclusionPathsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0594A422519E73009AF8AB /* MPITextExclusionPathsViewController.m */; };
 		3D282B3E2424CB290022EC5E /* MPITextSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D282B3D2424CB290022EC5E /* MPITextSelectionViewController.m */; };
 		3D39D950242A272900FCBA5E /* MPITextSizeCalculationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39D94F242A272900FCBA5E /* MPITextSizeCalculationViewController.m */; };
+		3D44E29724442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44E29624442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m */; };
 		3D934614225A287D00289029 /* MPIExampleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D934612225A287D00289029 /* MPIExampleHelper.m */; };
 		3D934731225AD5F600289029 /* MPITextSwfitExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D934730225AD5F600289029 /* MPITextSwfitExampleViewController.swift */; };
 		3DABD8C1226A08F100ABC3B9 /* MPIExampleAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD8C0226A08F100ABC3B9 /* MPIExampleAttachment.m */; };
@@ -86,6 +87,8 @@
 		3D282B3D2424CB290022EC5E /* MPITextSelectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPITextSelectionViewController.m; sourceTree = "<group>"; };
 		3D39D94E242A272900FCBA5E /* MPITextSizeCalculationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPITextSizeCalculationViewController.h; sourceTree = "<group>"; };
 		3D39D94F242A272900FCBA5E /* MPITextSizeCalculationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPITextSizeCalculationViewController.m; sourceTree = "<group>"; };
+		3D44E29524442FC800DCDCA2 /* MPITextAttributesSeparationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextAttributesSeparationViewController.h; sourceTree = "<group>"; };
+		3D44E29624442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextAttributesSeparationViewController.m; sourceTree = "<group>"; };
 		3D934612225A287D00289029 /* MPIExampleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIExampleHelper.m; sourceTree = "<group>"; };
 		3D934613225A287D00289029 /* MPIExampleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIExampleHelper.h; sourceTree = "<group>"; };
 		3D93472F225AD5F600289029 /* MPITextKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MPITextKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				3D282B3D2424CB290022EC5E /* MPITextSelectionViewController.m */,
 				3D39D94E242A272900FCBA5E /* MPITextSizeCalculationViewController.h */,
 				3D39D94F242A272900FCBA5E /* MPITextSizeCalculationViewController.m */,
+				3D44E29524442FC800DCDCA2 /* MPITextAttributesSeparationViewController.h */,
+				3D44E29624442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 				3DFD85FA2250B57D00CFEE05 /* MPITextAttributesViewController.m in Sources */,
 				6003F59E195388D20070C39A /* MPIAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MPIExampleViewController.m in Sources */,
+				3D44E29724442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				3DFD85FD2250B66C00CFEE05 /* MPITextAttachmentViewController.m in Sources */,
 				3D39D950242A272900FCBA5E /* MPITextSizeCalculationViewController.m in Sources */,

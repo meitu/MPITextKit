@@ -8,7 +8,7 @@
 
 #import "MPITextSizeCalculationViewController.h"
 #import "MPIExampleHelper.h"
-@import MPITextKit;
+#import <MPITextKit.h>
 
 @interface MPITextSizeCalculationViewController ()
 
