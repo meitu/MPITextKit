@@ -12,10 +12,12 @@
 #import <MPITextKit/MPITextBackedString.h>
 #import <MPITextKit/MPITextAttachment.h>
 #import <MPITextKit/MPITextBackground.h>
+#import <MPITextKit/MPITextEntity.h>
 #import <MPITextKit/MPITextLink.h>
 #else
 #import "MPITextBackedString.h"
 #import "MPITextAttachment.h"
 #import "MPITextBackground.h"
+#import "MPITextEntity.h"
 #import "MPITextLink.h"
 #endif

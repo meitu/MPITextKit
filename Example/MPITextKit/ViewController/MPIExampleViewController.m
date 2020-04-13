@@ -34,6 +34,7 @@
     [self addCell:@"Swift Example" class:NSStringFromClass(MPITextSwfitExampleViewController.class)];
     [self addCell:@"Text Selection" class:@"MPITextSelectionViewController"];
     [self addCell:@"Size Calculation" class:@"MPITextSizeCalculationViewController"];
+    [self addCell:@"Attributes Separation" class:@"MPITextAttributesSeparationViewController"];
     [self.tableView reloadData];
 }
 
