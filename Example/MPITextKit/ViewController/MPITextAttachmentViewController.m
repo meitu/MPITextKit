@@ -61,68 +61,10 @@
         UIImage *image = [UIImage imageNamed:@"dribbble64_imageio"];
         image = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
         
-        /**
-         Importance: We should use MPITextEntity to separate attachText1's  attributes and attachText2's  attributes, if attachText1's attributes are equal to attachText2's attributes, then attributes wll be merged.
-         e.g.1
-            NSMutableAttributedString *attributedText = [NSMutableAttributedString new];
-            UIFont *font = [UIFont systemFontOfSize:15];
-            {
-                NSAttributedString *part1 = [[NSAttributedString alloc] initWithString:@"part1" attributes:@{NSFontAttributeName: font}];
-                [attributedText appendAttributedString:part1];
-            }
-            {
-                NSAttributedString *part2 = [[NSAttributedString alloc] initWithString:@"part2" attributes:@{NSFontAttributeName: font}];
-                [attributedText appendAttributedString:part2];
-            }
-            NSLog(@"attributedText: %@", attributedText);
-            Prints: 『
-                attributedText: part1part2{
-                    NSFont = "<UICTFont: 0x7f8173c08650> font-family: \".SFUI-Regular\"; font-weight: normal; font-style: normal; font-size: 15.00pt";
-                }
-            』
-            NSFontAttributeName is merged.
-         
-         e.g.2
-             NSMutableAttributedString *attributedText = [NSMutableAttributedString new];
-             UIFont *font1 = [UIFont systemFontOfSize:15];
-             UIFont *font2 = [UIFont systemFontOfSize:16];
-             {
-                 NSAttributedString *part1 = [[NSAttributedString alloc] initWithString:@"part1" attributes:@{NSFontAttributeName: font1}];
-                 [attributedText appendAttributedString:part1];
-             }
-             {
-                 NSAttributedString *part2 = [[NSAttributedString alloc] initWithString:@"part1" attributes:@{NSFontAttributeName: font2}];
-                 [attributedText appendAttributedString:part2];
-             }
-             NSLog(@"attributedText: %@", attributedText);
-            Prints: 『
-                attributedText: part1{
-                    NSFont = "<UICTFont: 0x7fb3c9513750> font-family: \".SFUI-Regular\"; font-weight: normal; font-style: normal; font-size: 15.00pt";
-                }part2{
-                    NSFont = "<UICTFont: 0x7fb3c950aba0> font-family: \".SFUI-Regular\"; font-weight: normal; font-style: normal; font-size: 16.00pt";
-                }
-            』
-         NSFontAttributeName is not merged because font1 is not equal to font2.
-        */
-        /** --------------------------------- */
-        MPITextAttachment *attach1 = [MPITextAttachment new];
-        attach1.content = image;
-        NSMutableAttributedString *attachText1 = [[NSAttributedString attributedStringWithAttachment:attach1] mutableCopy];
-        MPITextEntity *entity1 = [MPITextEntity entityWithValue:@(text.length)];
-        [attachText1 addAttribute:MPITextEntityAttributeName value:entity1 range:attachText1.mpi_rangeOfAll];
-        [text appendAttributedString:attachText1];
-        /** --------------------------------- */
-        MPITextAttachment *attach2 = [MPITextAttachment new];
-        attach2.content = image;
-        NSMutableAttributedString *attachText2 = [[NSAttributedString attributedStringWithAttachment:attach2] mutableCopy];
-        /** Notice:
-         - attach1 is equal to attach2
-         - entity1 is *not* equal to entity2
-         */
-        MPITextEntity *entity2 = [MPITextEntity entityWithValue:@(text.length)];
-        [attachText2 addAttribute:MPITextEntityAttributeName value:entity2 range:attachText2.mpi_rangeOfAll];
-        [text appendAttributedString:attachText2];
-        /** --------------------------------- */
+        MPITextAttachment *attach = [MPITextAttachment new];
+        attach.content = image;
+        NSMutableAttributedString *attachText = [[NSAttributedString attributedStringWithAttachment:attach] mutableCopy];
+        [text appendAttributedString:attachText];
         [text appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:nil]];
     }
     
