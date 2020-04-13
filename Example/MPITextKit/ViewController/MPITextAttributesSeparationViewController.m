@@ -7,6 +7,7 @@
 //
 
 #import "MPITextAttributesSeparationViewController.h"
+#import "MPIExampleHelper.h"
 #import <MPITextKit.h>
 
 @interface MPITextAttributesSeparationViewController () <MPILabelDelegate>
@@ -19,6 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [MPIExampleHelper addDebugOptionToViewController:self];
     /**
      Importance: We should use MPITextEntity to separate attachText1's  attributes and attachText2's  attributes, if attachText1's attributes are equal to attachText2's attributes, then attributes wll be merged.
      e.g.1
