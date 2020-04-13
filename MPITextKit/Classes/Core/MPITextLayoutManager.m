@@ -509,8 +509,8 @@ typedef NS_ENUM(NSInteger, MPITextBackgroundType) {
     // We are just measuring the line heights here, so we can use the
     // heights used by TextKit, which tend to be pretty good.
     properGlyphRect = CGRectMake(CGRectGetMinX(lineFragmentRect) + location.x,
-                                 (glyph == kCGFontIndexInvalid) ? glyphRect.origin.y : baseline - ascent,
-                                 advance,
+                                 (glyph == kCGFontIndexInvalid) ? CGRectGetMinY(glyphRect) : baseline - ascent,
+                                 (glyph == kCGFontIndexInvalid) ? CGRectGetWidth(glyphRect) : advance,
                                  lineHeight);
     return properGlyphRect;
 }
