@@ -70,7 +70,7 @@
 }
 
 - (instancetype)initWithRenderAttributes:(MPITextRenderAttributes *)renderAttributes {
-    self = [self init];
+    self = [super init];
     if (self) {
         _attributedText = renderAttributes.attributedText;
         _exclusionPaths = renderAttributes.exclusionPaths;
