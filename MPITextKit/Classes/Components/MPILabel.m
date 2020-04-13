@@ -740,12 +740,14 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
 
 - (NSUInteger)characterIndexForPoint:(CGPoint)point {
     MPITextRenderer *renderer = [self currentRenderer];
+    point = [self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size];
     return [renderer characterIndexForPoint:point];
 }
 
 - (void)beginSelectionAtPoint:(CGPoint)point; {
     MPITextRenderer *renderer = [self currentRenderer];
-    NSUInteger characterIndex = [renderer characterIndexForPoint:[self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size]];
+    point = [self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size];
+    NSUInteger characterIndex = [renderer characterIndexForPoint:point];
     if (characterIndex == NSNotFound) {
         return;
     }
