@@ -118,10 +118,9 @@
         } else if (characterIndex > pinnedGrabberIndex) {
             NSUInteger location = isStartGrabber ? pinnedGrabberIndex + 1 : pinnedGrabberIndex;
             selectedRange = NSMakeRange(location,
-                                        characterIndex - location);
+                                        characterIndex - location + 1);
         } else {
-            selectedRange = NSMakeRange(pinnedGrabberIndex,
-                                        isStartGrabber ? 1 : 0);
+            selectedRange = NSMakeRange(pinnedGrabberIndex, 1);
         }
     }
     
