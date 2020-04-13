@@ -3,7 +3,7 @@
 //  MeituMV
 //
 //  Created by Tpphha on 2018/8/11.
-//  Copyright © 2018年 Claus Höfele. All rights reserved.
+//  Copyright © 2018 美图网. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
