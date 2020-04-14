@@ -34,7 +34,6 @@
 #import "MPITextMagnifier.h"
 #import "MPITextSelectionView.h"
 #import "MPITextSentinel.h"
-#import "MPITextWeakProxy.h"
 #import "MPITextAttachment.h"
 #import "MPITextAttributes.h"
 #import "MPITextBackedString.h"

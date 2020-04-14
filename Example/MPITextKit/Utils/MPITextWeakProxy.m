@@ -36,6 +36,10 @@
     return methodSignature ?: [NSMethodSignature signatureWithObjCTypes:"@^v^c"];
 }
 
+- (void)forwardInvocation:(NSInvocation *)invocation {
+    // If we are down here this means _interceptor and _target where nil. Just don't do anything to prevent a crash
+}
+
 - (BOOL)respondsToSelector:(SEL)aSelector {
     return [_target respondsToSelector:aSelector];
 }

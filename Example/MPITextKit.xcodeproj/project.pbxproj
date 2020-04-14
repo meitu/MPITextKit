@@ -12,11 +12,6 @@
 		3D0594832250E316009AF8AB /* EmoticonQQ.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3D0594802250E316009AF8AB /* EmoticonQQ.bundle */; };
 		3D0594842250E316009AF8AB /* dribbble64_imageio.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0594812250E316009AF8AB /* dribbble64_imageio.png */; };
 		3D0594862250E31D009AF8AB /* pia@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0594852250E31D009AF8AB /* pia@2x.png */; };
-		3D05948C2250E3ED009AF8AB /* NSBundle+MPIExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D05948B2250E3ED009AF8AB /* NSBundle+MPIExample.m */; };
-		3D05948F2250E450009AF8AB /* NSString+MPIExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D05948E2250E450009AF8AB /* NSString+MPIExample.m */; };
-		3D0594922250E5FA009AF8AB /* UIView+MPIExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0594912250E5FA009AF8AB /* UIView+MPIExample.m */; };
-		3D0594952250F707009AF8AB /* MPITextTruncatingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0594942250F707009AF8AB /* MPITextTruncatingTableViewCell.m */; };
-		3D059498225110F0009AF8AB /* MPITextAsyncDisplayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D059497225110F0009AF8AB /* MPITextAsyncDisplayTableViewCell.m */; };
 		3D05949E22511722009AF8AB /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D05949D22511722009AF8AB /* YYFPSLabel.m */; };
 		3D0594A222511895009AF8AB /* MPIExampleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0594A122511895009AF8AB /* MPIExampleNavigationController.m */; };
 		3D0594A522519E73009AF8AB /* MPITextExclusionPathsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0594A422519E73009AF8AB /* MPITextExclusionPathsViewController.m */; };
@@ -28,6 +23,12 @@
 		3DABD8C1226A08F100ABC3B9 /* MPIExampleAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD8C0226A08F100ABC3B9 /* MPIExampleAttachment.m */; };
 		3DABD8C4226A090600ABC3B9 /* MPIExampleBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD8C3226A090600ABC3B9 /* MPIExampleBackground.m */; };
 		3DABD8C7226A09F400ABC3B9 /* MPITextCustomAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD8C6226A09F400ABC3B9 /* MPITextCustomAttributeViewController.m */; };
+		3DC3DCBB24454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3DCB724454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.m */; };
+		3DC3DCBC24454DC000E56AE2 /* MPITextTruncatingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3DCB924454DC000E56AE2 /* MPITextTruncatingTableViewCell.m */; };
+		3DC3DCC424454DCA00E56AE2 /* UIView+MPIExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3DCBF24454DC900E56AE2 /* UIView+MPIExample.m */; };
+		3DC3DCC524454DCA00E56AE2 /* NSBundle+MPIExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3DCC024454DC900E56AE2 /* NSBundle+MPIExample.m */; };
+		3DC3DCC624454DCA00E56AE2 /* NSString+MPIExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3DCC124454DC900E56AE2 /* NSString+MPIExample.m */; };
+		3DC3DCC924454DF800E56AE2 /* MPITextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3DCC824454DF800E56AE2 /* MPITextWeakProxy.m */; };
 		3DFD85FA2250B57D00CFEE05 /* MPITextAttributesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD85F82250B57D00CFEE05 /* MPITextAttributesViewController.m */; };
 		3DFD85FD2250B66C00CFEE05 /* MPITextAttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD85FC2250B66C00CFEE05 /* MPITextAttachmentViewController.m */; };
 		3DFD86002250B85500CFEE05 /* MPITextAsyncDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD85FF2250B85500CFEE05 /* MPITextAsyncDisplayViewController.m */; };
@@ -67,16 +68,6 @@
 		3D0594802250E316009AF8AB /* EmoticonQQ.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EmoticonQQ.bundle; sourceTree = "<group>"; };
 		3D0594812250E316009AF8AB /* dribbble64_imageio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dribbble64_imageio.png; sourceTree = "<group>"; };
 		3D0594852250E31D009AF8AB /* pia@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pia@2x.png"; sourceTree = "<group>"; };
-		3D05948A2250E3ED009AF8AB /* NSBundle+MPIExample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+MPIExample.h"; sourceTree = "<group>"; };
-		3D05948B2250E3ED009AF8AB /* NSBundle+MPIExample.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+MPIExample.m"; sourceTree = "<group>"; };
-		3D05948D2250E450009AF8AB /* NSString+MPIExample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MPIExample.h"; sourceTree = "<group>"; };
-		3D05948E2250E450009AF8AB /* NSString+MPIExample.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MPIExample.m"; sourceTree = "<group>"; };
-		3D0594902250E5FA009AF8AB /* UIView+MPIExample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+MPIExample.h"; sourceTree = "<group>"; };
-		3D0594912250E5FA009AF8AB /* UIView+MPIExample.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+MPIExample.m"; sourceTree = "<group>"; };
-		3D0594932250F707009AF8AB /* MPITextTruncatingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPITextTruncatingTableViewCell.h; sourceTree = "<group>"; };
-		3D0594942250F707009AF8AB /* MPITextTruncatingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPITextTruncatingTableViewCell.m; sourceTree = "<group>"; };
-		3D059496225110F0009AF8AB /* MPITextAsyncDisplayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPITextAsyncDisplayTableViewCell.h; sourceTree = "<group>"; };
-		3D059497225110F0009AF8AB /* MPITextAsyncDisplayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPITextAsyncDisplayTableViewCell.m; sourceTree = "<group>"; };
 		3D05949C22511722009AF8AB /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFPSLabel.h; sourceTree = "<group>"; };
 		3D05949D22511722009AF8AB /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFPSLabel.m; sourceTree = "<group>"; };
 		3D0594A022511895009AF8AB /* MPIExampleNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPIExampleNavigationController.h; sourceTree = "<group>"; };
@@ -99,6 +90,18 @@
 		3DABD8C3226A090600ABC3B9 /* MPIExampleBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPIExampleBackground.m; sourceTree = "<group>"; };
 		3DABD8C5226A09F400ABC3B9 /* MPITextCustomAttributeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPITextCustomAttributeViewController.h; sourceTree = "<group>"; };
 		3DABD8C6226A09F400ABC3B9 /* MPITextCustomAttributeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPITextCustomAttributeViewController.m; sourceTree = "<group>"; };
+		3DC3DCB724454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextAsyncDisplayTableViewCell.m; sourceTree = "<group>"; };
+		3DC3DCB824454DC000E56AE2 /* MPITextTruncatingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextTruncatingTableViewCell.h; sourceTree = "<group>"; };
+		3DC3DCB924454DC000E56AE2 /* MPITextTruncatingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextTruncatingTableViewCell.m; sourceTree = "<group>"; };
+		3DC3DCBA24454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextAsyncDisplayTableViewCell.h; sourceTree = "<group>"; };
+		3DC3DCBE24454DC900E56AE2 /* NSString+MPIExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MPIExample.h"; sourceTree = "<group>"; };
+		3DC3DCBF24454DC900E56AE2 /* UIView+MPIExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MPIExample.m"; sourceTree = "<group>"; };
+		3DC3DCC024454DC900E56AE2 /* NSBundle+MPIExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+MPIExample.m"; sourceTree = "<group>"; };
+		3DC3DCC124454DC900E56AE2 /* NSString+MPIExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MPIExample.m"; sourceTree = "<group>"; };
+		3DC3DCC224454DC900E56AE2 /* NSBundle+MPIExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+MPIExample.h"; sourceTree = "<group>"; };
+		3DC3DCC324454DC900E56AE2 /* UIView+MPIExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MPIExample.h"; sourceTree = "<group>"; };
+		3DC3DCC824454DF800E56AE2 /* MPITextWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextWeakProxy.m; sourceTree = "<group>"; };
+		3DC3DCCA24454E0300E56AE2 /* MPITextWeakProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPITextWeakProxy.h; sourceTree = "<group>"; };
 		3DFD85F82250B57D00CFEE05 /* MPITextAttributesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextAttributesViewController.m; sourceTree = "<group>"; };
 		3DFD85F92250B57D00CFEE05 /* MPITextAttributesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextAttributesViewController.h; sourceTree = "<group>"; };
 		3DFD85FB2250B66C00CFEE05 /* MPITextAttachmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPITextAttachmentViewController.h; sourceTree = "<group>"; };
@@ -174,19 +177,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		3D0594892250E3DA009AF8AB /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				3D05948A2250E3ED009AF8AB /* NSBundle+MPIExample.h */,
-				3D05948B2250E3ED009AF8AB /* NSBundle+MPIExample.m */,
-				3D05948D2250E450009AF8AB /* NSString+MPIExample.h */,
-				3D05948E2250E450009AF8AB /* NSString+MPIExample.m */,
-				3D0594902250E5FA009AF8AB /* UIView+MPIExample.h */,
-				3D0594912250E5FA009AF8AB /* UIView+MPIExample.m */,
-			);
-			name = Category;
-			sourceTree = "<group>";
-		};
 		3D059499225110FD009AF8AB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,17 +207,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		3D05949B2251110A009AF8AB /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				3D0594932250F707009AF8AB /* MPITextTruncatingTableViewCell.h */,
-				3D0594942250F707009AF8AB /* MPITextTruncatingTableViewCell.m */,
-				3D059496225110F0009AF8AB /* MPITextAsyncDisplayTableViewCell.h */,
-				3D059497225110F0009AF8AB /* MPITextAsyncDisplayTableViewCell.m */,
-			);
-			name = Cell;
-			sourceTree = "<group>";
-		};
 		3D05949F22511725009AF8AB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +234,39 @@
 				3D934612225A287D00289029 /* MPIExampleHelper.m */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		3DC3DCB624454DC000E56AE2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3DC3DCB724454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.m */,
+				3DC3DCB824454DC000E56AE2 /* MPITextTruncatingTableViewCell.h */,
+				3DC3DCB924454DC000E56AE2 /* MPITextTruncatingTableViewCell.m */,
+				3DC3DCBA24454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.h */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3DC3DCBD24454DC900E56AE2 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				3DC3DCBE24454DC900E56AE2 /* NSString+MPIExample.h */,
+				3DC3DCBF24454DC900E56AE2 /* UIView+MPIExample.m */,
+				3DC3DCC024454DC900E56AE2 /* NSBundle+MPIExample.m */,
+				3DC3DCC124454DC900E56AE2 /* NSString+MPIExample.m */,
+				3DC3DCC224454DC900E56AE2 /* NSBundle+MPIExample.h */,
+				3DC3DCC324454DC900E56AE2 /* UIView+MPIExample.h */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		3DC3DCC724454DD100E56AE2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3DC3DCCA24454E0300E56AE2 /* MPITextWeakProxy.h */,
+				3DC3DCC824454DF800E56AE2 /* MPITextWeakProxy.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		5F73EE4D8DF239CDC90FBA06 /* Pods */ = {
@@ -305,11 +317,12 @@
 		6003F593195388D20070C39A /* Example for MPITextKit */ = {
 			isa = PBXGroup;
 			children = (
+				3DC3DCC724454DD100E56AE2 /* Utils */,
+				3DC3DCBD24454DC900E56AE2 /* Category */,
 				3DABD8BE226A089300ABC3B9 /* Attribute */,
 				3D059499225110FD009AF8AB /* ViewController */,
 				3D05949F22511725009AF8AB /* View */,
-				3D05949B2251110A009AF8AB /* Cell */,
-				3D0594892250E3DA009AF8AB /* Category */,
+				3DC3DCB624454DC000E56AE2 /* Cell */,
 				3DB09FA6225A284C00608782 /* Helper */,
 				3D0594882250E3BD009AF8AB /* Resources */,
 				6003F59C195388D20070C39A /* MPIAppDelegate.h */,
@@ -545,26 +558,27 @@
 			files = (
 				3D0594A222511895009AF8AB /* MPIExampleNavigationController.m in Sources */,
 				3D05949E22511722009AF8AB /* YYFPSLabel.m in Sources */,
+				3DC3DCC924454DF800E56AE2 /* MPITextWeakProxy.m in Sources */,
 				3D282B3E2424CB290022EC5E /* MPITextSelectionViewController.m in Sources */,
 				3DABD8C1226A08F100ABC3B9 /* MPIExampleAttachment.m in Sources */,
 				3DFD86062250BEC200CFEE05 /* MPITextTruncatingViewController.m in Sources */,
+				3DC3DCC424454DCA00E56AE2 /* UIView+MPIExample.m in Sources */,
 				3DFD86002250B85500CFEE05 /* MPITextAsyncDisplayViewController.m in Sources */,
+				3DC3DCC624454DCA00E56AE2 /* NSString+MPIExample.m in Sources */,
 				3D0594A522519E73009AF8AB /* MPITextExclusionPathsViewController.m in Sources */,
 				3D934731225AD5F600289029 /* MPITextSwfitExampleViewController.swift in Sources */,
 				3DFD85FA2250B57D00CFEE05 /* MPITextAttributesViewController.m in Sources */,
 				6003F59E195388D20070C39A /* MPIAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MPIExampleViewController.m in Sources */,
+				3DC3DCC524454DCA00E56AE2 /* NSBundle+MPIExample.m in Sources */,
 				3D44E29724442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m in Sources */,
+				3DC3DCBC24454DC000E56AE2 /* MPITextTruncatingTableViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				3DFD85FD2250B66C00CFEE05 /* MPITextAttachmentViewController.m in Sources */,
 				3D39D950242A272900FCBA5E /* MPITextSizeCalculationViewController.m in Sources */,
-				3D0594922250E5FA009AF8AB /* UIView+MPIExample.m in Sources */,
 				3DABD8C7226A09F400ABC3B9 /* MPITextCustomAttributeViewController.m in Sources */,
 				3DABD8C4226A090600ABC3B9 /* MPIExampleBackground.m in Sources */,
-				3D059498225110F0009AF8AB /* MPITextAsyncDisplayTableViewCell.m in Sources */,
-				3D0594952250F707009AF8AB /* MPITextTruncatingTableViewCell.m in Sources */,
-				3D05948F2250E450009AF8AB /* NSString+MPIExample.m in Sources */,
-				3D05948C2250E3ED009AF8AB /* NSBundle+MPIExample.m in Sources */,
+				3DC3DCBB24454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.m in Sources */,
 				3D934614225A287D00289029 /* MPIExampleHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
