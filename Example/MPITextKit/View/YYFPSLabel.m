@@ -7,7 +7,7 @@
 //
 
 #import "YYFPSLabel.h"
-#import <MPITextKit/MPITextWeakProxy.h>
+#import "MPITextWeakProxy.h"
 
 #define kSize CGSizeMake(55, 20)
 
