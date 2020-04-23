@@ -71,8 +71,8 @@ label.delegate = self; /// Interact Links.
 
 label.attributedText = attributedText;
 
-// Truncation Token.
-label.truncationAttributedToken = [[NSAttributedString alloc] initWithString:@"..."];
+// Truncation Token ...
+label.truncationAttributedToken = MPITextDefaultTruncationAttributedToken(); 
 
 // Additional Truncation Message.
 label.additionalTruncationAttributedMessage = [[NSAttributedString alloc] initWithString:@"more" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.000 green:0.449 blue:1.000 alpha:1.000], MPITextLinkAttributeName: [MPITextLink new]}];
