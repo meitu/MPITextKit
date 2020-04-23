@@ -205,7 +205,7 @@
                        interaction == MPITextItemInteractionTap ? @"Tapped" : @"Long pressed",
                        [attributedText attributedSubstringFromRange:characterRange].string]];
     if ([link.value isKindOfClass:NSURL.class]) {
-        [UIApplication.sharedApplication openURL:link.value options:@{} completionHandler:nil];
+        [UIApplication.sharedApplication openURL:(NSURL *)link.value options:@{} completionHandler:nil];
     }
 }
 
