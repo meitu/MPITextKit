@@ -21,7 +21,9 @@ class MPITextSwfitExampleViewController: UIViewController {
         MPIExampleHelper.addDebugOption(to: self)
         
         let helloWorldAttributedText = NSMutableAttributedString.init(string: "你好！Hello World. ")
-        let link = MPITextLink.init()
+        let link = MPIExampleLink.init()
+        link.value = NSString.init(string: "https://meitu.com")
+        link.linkType = .url
         let tapmeAttributedText = NSAttributedString.init(string: "Tap me!", attributes: [.MPILink: link, .foregroundColor: UIColor.init(red: 0.000, green: 0.449, blue: 1.000, alpha: 1.000)])
         helloWorldAttributedText.append(tapmeAttributedText)
         
@@ -61,6 +63,7 @@ class MPITextSwfitExampleViewController: UIViewController {
 
 extension MPITextSwfitExampleViewController: MPILabelDelegate {
     func label(_ label: MPILabel, didInteractWith link: MPITextLink, forAttributedText attributedText: NSAttributedString, in characterRange: NSRange, interaction: MPITextItemInteraction) {
-        print("Tapped: \(attributedText.attributedSubstring(from: characterRange).string)")
+        let exLink = link as! MPIExampleLink
+        print("Tapped => text: \(attributedText.attributedSubstring(from: characterRange).string)" + "value: " + String(exLink.value as! NSString) + " linkType: \(exLink.linkType)")
     }
 }

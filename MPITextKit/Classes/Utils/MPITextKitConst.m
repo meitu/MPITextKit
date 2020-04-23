@@ -10,7 +10,6 @@
 
 const CGSize MPITextContainerMaxSize = (CGSize){0x100000, 0x100000};
 
-NSAttributedStringKey const MPITextEntityAttributeName = @"MPITextEntity";
 NSAttributedStringKey const MPITextLinkAttributeName = @"MPITextLink";
 NSAttributedStringKey const MPITextBackgroundAttributeName = @"MPITextBackground";
 NSAttributedStringKey const MPITextBlockBackgroundAttributeName = @"MPITextBlockBackground";

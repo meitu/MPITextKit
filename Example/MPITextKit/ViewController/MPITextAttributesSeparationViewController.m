@@ -10,6 +10,8 @@
 #import "MPIExampleHelper.h"
 #import <MPITextKit.h>
 
+static NSString *const MPITextAttributesSeparatorAttributeName = @"MPITextAttributesSeparator";
+
 @interface MPITextAttributesSeparationViewController () <MPILabelDelegate>
 
 @end
@@ -23,7 +25,7 @@
     
     [MPIExampleHelper addDebugOptionToViewController:self];
     /**
-     Importance: We should use MPITextEntity to separate attachText1's  attributes and attachText2's  attributes, if attachText1's attributes are equal to attachText2's attributes, then attributes wll be merged.
+     Important: We should use an attribute to separate attachText1's  attributes and attachText2's  attributes, if attachText1's attributes are equal to attachText2's attributes, then attributes wll be merged.
      e.g.1
         NSMutableAttributedString *attributedText = [NSMutableAttributedString new];
         UIFont *font = [UIFont systemFontOfSize:15];
@@ -76,8 +78,8 @@
     NSMutableAttributedString *attachText1 = [[NSAttributedString attributedStringWithAttachment:attach1] mutableCopy];
     [attachText1 addAttribute:MPITextBackedStringAttributeName value:[MPITextBackedString stringWithString:@"[dribbble]"] range:attachText1.mpi_rangeOfAll];
     
-    MPITextEntity *entity1 = [MPITextEntity entityWithValue:@(attributedText.length)];
-    [attachText1 addAttribute:MPITextEntityAttributeName value:entity1 range:attachText1.mpi_rangeOfAll];
+    NSNumber *attributesSeparator1 = @(attributedText.length);
+    [attachText1 addAttribute:MPITextAttributesSeparatorAttributeName value:attributesSeparator1 range:attachText1.mpi_rangeOfAll];
     
     [attributedText appendAttributedString:attachText1];
     /** --------------------------------- */
@@ -87,10 +89,10 @@
     [attachText2 addAttribute:MPITextBackedStringAttributeName value:[MPITextBackedString stringWithString:@"[dribbble]"] range:attachText2.mpi_rangeOfAll];
     /** Notice:
      - attach1 is equal to attach2
-     - entity1 is *not* equal to entity2
+     - attributesSeparator1 is *not* equal to attributesSeparator2
      */
-    MPITextEntity *entity2 = [MPITextEntity entityWithValue:@(attributedText.length)];
-    [attachText2 addAttribute:MPITextEntityAttributeName value:entity2 range:attachText2.mpi_rangeOfAll];
+    NSNumber *attributesSeparator2 = @(attributedText.length);
+    [attachText2 addAttribute:MPITextAttributesSeparatorAttributeName value:attributesSeparator2 range:attachText2.mpi_rangeOfAll];
     
     [attributedText appendAttributedString:attachText2];
     
