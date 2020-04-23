@@ -38,7 +38,6 @@
 #import "MPITextAttributes.h"
 #import "MPITextBackedString.h"
 #import "MPITextBackground.h"
-#import "MPITextEntity.h"
 #import "MPITextLink.h"
 #import "NSAttributedString+MPITextKit.h"
 #import "NSMutableAttributedString+MPITextKit.h"

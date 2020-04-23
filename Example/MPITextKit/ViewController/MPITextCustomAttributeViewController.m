@@ -64,7 +64,7 @@
      **/
 }
 
-#pragma mark - MPITextViewDelegate
+#pragma mark - MPILabelDelegate
 
 - (NSDictionary *)label:(MPILabel *)label highlightedTextAttributesWithLink:(MPITextLink *)link forAttributedText:(NSAttributedString *)attributedText inRange:(NSRange)characterRange {
     UIColor *textColor = [attributedText attribute:NSForegroundColorAttributeName

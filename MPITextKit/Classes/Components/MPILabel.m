@@ -855,55 +855,50 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     BOOL attachmentsNeedsUpdate = _state.attachmentsNeedsUpdate;
     NSMutableArray *attachmentViews = self.attachmentViews;
     NSMutableArray *attachmentLayers = self.attachmentLayers;
-    
+
     MPITextRenderer *renderer = [self currentRenderer];
+    CGPoint point = [self convertPointFromTextKit:CGPointZero forBounds:bounds textSize:renderer.size];
 
     MPITextAsyncLayerDisplayTask *task = [MPITextAsyncLayerDisplayTask new];
     task.displaysAsynchronously = displaysAsync;
     
     task.willDisplay = ^(CALayer * _Nonnull layer) {
-        MPILabel *textView = self;
-        if (!textView) {
+        MPILabel *label = (MPILabel *)layer.delegate;
+        if (!label) {
             return;
         }
         
         [layer removeAnimationForKey:kAsyncFadeAnimationKey];
         
         if (attachmentsNeedsUpdate) {
-            [textView clearAttachmentViewsAndLayersWithAttachmetsInfo:renderer.attachmentsInfo];
+            [label clearAttachmentViewsAndLayersWithAttachmetsInfo:renderer.attachmentsInfo];
         }
     };
     
     task.display = ^(CGContextRef  _Nonnull context, CGSize size, BOOL (^ _Nonnull isCancelled)(void)) {
-        MPILabel *textView = self;
-        if (!textView) {
-            return;
-        }
-        
         if (isCancelled()) {
             return;
         }
         
-        CGPoint point = [self convertPointFromTextKit:CGPointZero forBounds:bounds textSize:renderer.size];
         [renderer drawAtPoint:point debugOption:debugOption];
     };
     
     task.didDisplay = ^(CALayer * _Nonnull layer, BOOL finished) {
-        MPILabel *textView = self;
-        if (!textView) {
+        MPILabel *label = (MPILabel *)layer.delegate;
+        if (!label) {
             return;
         }
         
         if (!finished) {
-            [textView clearAttachmentViewsAndLayers];
+            [label clearAttachmentViewsAndLayers];
             return;
         }
         
         if (attachmentsNeedsUpdate) {
-            textView->_state.attachmentsNeedsUpdate = NO;
+            label->_state.attachmentsNeedsUpdate = NO;
             
             CGPoint point = [self convertPointFromTextKit:CGPointZero forBounds:bounds textSize:renderer.size];
-            [renderer drawViewAndLayerAtPoint:point referenceTextView:textView];
+            [renderer drawViewAndLayerAtPoint:point referenceTextView:label];
             
             for (MPITextAttachment *attachment in renderer.attachmentsInfo.attachments) {
                 id content = attachment.content;
@@ -916,7 +911,7 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
         }
         
         if (!contentsUptodate) {
-            textView->_state.contentsUpdated = YES;
+            label->_state.contentsUpdated = YES;
         }
         
         if (fadeForAsync) {
@@ -927,7 +922,7 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
             [layer addAnimation:transition forKey:kAsyncFadeAnimationKey];
         }
         
-        [textView updateSelectionView];
+        [label updateSelectionView];
     };
     
     return task;

@@ -239,10 +239,10 @@
 		3DC3DCB624454DC000E56AE2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				3DC3DCBA24454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.h */,
 				3DC3DCB724454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.m */,
 				3DC3DCB824454DC000E56AE2 /* MPITextTruncatingTableViewCell.h */,
 				3DC3DCB924454DC000E56AE2 /* MPITextTruncatingTableViewCell.m */,
-				3DC3DCBA24454DC000E56AE2 /* MPITextAsyncDisplayTableViewCell.h */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -250,12 +250,12 @@
 		3DC3DCBD24454DC900E56AE2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				3DC3DCBE24454DC900E56AE2 /* NSString+MPIExample.h */,
-				3DC3DCBF24454DC900E56AE2 /* UIView+MPIExample.m */,
-				3DC3DCC024454DC900E56AE2 /* NSBundle+MPIExample.m */,
-				3DC3DCC124454DC900E56AE2 /* NSString+MPIExample.m */,
 				3DC3DCC224454DC900E56AE2 /* NSBundle+MPIExample.h */,
+				3DC3DCC024454DC900E56AE2 /* NSBundle+MPIExample.m */,
+				3DC3DCBE24454DC900E56AE2 /* NSString+MPIExample.h */,
+				3DC3DCC124454DC900E56AE2 /* NSString+MPIExample.m */,
 				3DC3DCC324454DC900E56AE2 /* UIView+MPIExample.h */,
+				3DC3DCBF24454DC900E56AE2 /* UIView+MPIExample.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
