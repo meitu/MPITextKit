@@ -20,6 +20,7 @@
 		3D44E29724442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44E29624442FC800DCDCA2 /* MPITextAttributesSeparationViewController.m */; };
 		3D934614225A287D00289029 /* MPIExampleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D934612225A287D00289029 /* MPIExampleHelper.m */; };
 		3D934731225AD5F600289029 /* MPITextSwfitExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D934730225AD5F600289029 /* MPITextSwfitExampleViewController.swift */; };
+		3DA1D23724519DB900E53BD4 /* MPIExampleLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA1D23624519DB900E53BD4 /* MPIExampleLink.swift */; };
 		3DABD8C1226A08F100ABC3B9 /* MPIExampleAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD8C0226A08F100ABC3B9 /* MPIExampleAttachment.m */; };
 		3DABD8C4226A090600ABC3B9 /* MPIExampleBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD8C3226A090600ABC3B9 /* MPIExampleBackground.m */; };
 		3DABD8C7226A09F400ABC3B9 /* MPITextCustomAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD8C6226A09F400ABC3B9 /* MPITextCustomAttributeViewController.m */; };
@@ -84,6 +85,7 @@
 		3D934613225A287D00289029 /* MPIExampleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIExampleHelper.h; sourceTree = "<group>"; };
 		3D93472F225AD5F600289029 /* MPITextKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MPITextKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		3D934730225AD5F600289029 /* MPITextSwfitExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPITextSwfitExampleViewController.swift; sourceTree = "<group>"; };
+		3DA1D23624519DB900E53BD4 /* MPIExampleLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPIExampleLink.swift; sourceTree = "<group>"; };
 		3DABD8BF226A08F100ABC3B9 /* MPIExampleAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPIExampleAttachment.h; sourceTree = "<group>"; };
 		3DABD8C0226A08F100ABC3B9 /* MPIExampleAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPIExampleAttachment.m; sourceTree = "<group>"; };
 		3DABD8C2226A090600ABC3B9 /* MPIExampleBackground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPIExampleBackground.h; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				3DABD8C0226A08F100ABC3B9 /* MPIExampleAttachment.m */,
 				3DABD8C2226A090600ABC3B9 /* MPIExampleBackground.h */,
 				3DABD8C3226A090600ABC3B9 /* MPIExampleBackground.m */,
+				3DA1D23624519DB900E53BD4 /* MPIExampleLink.swift */,
 			);
 			path = Attribute;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				3D0594A222511895009AF8AB /* MPIExampleNavigationController.m in Sources */,
 				3D05949E22511722009AF8AB /* YYFPSLabel.m in Sources */,
 				3DC3DCC924454DF800E56AE2 /* MPITextWeakProxy.m in Sources */,
+				3DA1D23724519DB900E53BD4 /* MPIExampleLink.swift in Sources */,
 				3D282B3E2424CB290022EC5E /* MPITextSelectionViewController.m in Sources */,
 				3DABD8C1226A08F100ABC3B9 /* MPIExampleAttachment.m in Sources */,
 				3DFD86062250BEC200CFEE05 /* MPITextTruncatingViewController.m in Sources */,
