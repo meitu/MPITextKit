@@ -25,7 +25,7 @@ static NSString *const MPITextAttributesSeparatorAttributeName = @"MPITextAttrib
     
     [MPIExampleHelper addDebugOptionToViewController:self];
     /**
-     Important: We should use MPITextEntity to separate attachText1's  attributes and attachText2's  attributes, if attachText1's attributes are equal to attachText2's attributes, then attributes wll be merged.
+     Important: We should use an attribute to separate attachText1's  attributes and attachText2's  attributes, if attachText1's attributes are equal to attachText2's attributes, then attributes wll be merged.
      e.g.1
         NSMutableAttributedString *attributedText = [NSMutableAttributedString new];
         UIFont *font = [UIFont systemFontOfSize:15];
