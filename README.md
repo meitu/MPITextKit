@@ -117,6 +117,7 @@ debugOptions.glyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.0
 
 - For multi-line text display in AutoLayout, it is recommended to set the `preferredMaxLayoutWidth` to improve performance.
 - You should not use `text` and `attributedText` at the same time.
+- When you customize attribute, you should override the  `- isEqual:` and  `- hash` methods.
 
 ## Reference
 
