@@ -1,0 +1,37 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :custom_lane do
+    # add actions here: https://docs.fastlane.tools/actions
+  end
+
+  private_lane :_test do |options|
+    scan(
+      scheme: "MPITextKit", 
+      clean: true, 
+      xcargs: "SWIFT_VERSION=#{options[:swift_version]}",
+      destination: options[:destination]
+    )
+  end
+
+  lane :test do |options|
+    _test(options)
+  end
+  
+  lane :test_ci do
+    test(destination: ENV["DESTINATION"], swift_version: ENV["SWIFT_VERSION"])
+  end
+
+end
