@@ -30,8 +30,5 @@ let package = Package(
         .target(
             name: "MPITextKit",
             path: "Sources"),
-        .testTarget(
-            name: "MPITextKitTests",
-            dependencies: ["MPITextKit"]),
     ]
 )
