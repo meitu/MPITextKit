@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3D3EDD092453FC18009DB791 /* MPITextKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3EDCFF2453FC18009DB791 /* MPITextKit.framework */; };
 		3D3EDD0E2453FC18009DB791 /* MPITextKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3EDD0D2453FC18009DB791 /* MPITextKitTests.m */; };
-		3D3EDDB42453FE5C009DB791 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D3EDDB32453FE5C009DB791 /* Info.plist */; };
 		3D87D73C245407B8004EC040 /* MPITextAsyncLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D738245407B8004EC040 /* MPITextAsyncLayer.m */; };
 		3D87D73D245407B8004EC040 /* MPITextAsyncLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D739245407B8004EC040 /* MPITextAsyncLayer.h */; };
 		3D87D73E245407B8004EC040 /* MPILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D73A245407B8004EC040 /* MPILabel.m */; };
@@ -479,7 +478,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D3EDDB42453FE5C009DB791 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
