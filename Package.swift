@@ -11,6 +11,14 @@ let package = Package(
         .library(
             name: "MPITextKit",
             targets: ["MPITextKit"]),
+        
+        .library(name: "MPITextKitDynamic",
+                 type: .dynamic,
+                 targets: ["MPITextKit"]),
+        
+        .library(name: "MPITextKitStatic",
+                 type: .static,
+                 targets: ["MPITextKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -21,8 +29,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "MPITextKit",
-            dependencies: [],
-            path: "Sources",),
+            path: "Sources"),
         .testTarget(
             name: "MPITextKitTests",
             dependencies: ["MPITextKit"]),
