@@ -4,3 +4,4 @@ xcschememanagement.plist
 IDEFindNavigatorScopes.plist
 *.xcbkptlist
 *.xcuserstate
+Carthage/

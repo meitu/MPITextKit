@@ -38,7 +38,6 @@
 		3D87D76A24540845004EC040 /* MPITextGeometryHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D76724540845004EC040 /* MPITextGeometryHelpers.h */; };
 		3D87D76B24540845004EC040 /* MPITextGeometryHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D76824540845004EC040 /* MPITextGeometryHelpers.m */; };
 		3D87D76E2454084F004EC040 /* MPITextHashing.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D76C2454084F004EC040 /* MPITextHashing.h */; };
-		3D87D76F2454084F004EC040 /* MPITextHashing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D76D2454084F004EC040 /* MPITextHashing.mm */; };
 		3D87D77224540859004EC040 /* MPITextInput.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D77024540859004EC040 /* MPITextInput.h */; };
 		3D87D77324540859004EC040 /* MPITextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D77124540859004EC040 /* MPITextInput.m */; };
 		3D87D77824540867004EC040 /* MPITextInteractionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D77424540867004EC040 /* MPITextInteractionManager.h */; };
@@ -49,7 +48,6 @@
 		3D87D77F2454087D004EC040 /* MPITextKitBugFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D77D2454087C004EC040 /* MPITextKitBugFixer.m */; };
 		3D87D78224540883004EC040 /* MPITextKitConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D78024540883004EC040 /* MPITextKitConst.h */; };
 		3D87D78324540883004EC040 /* MPITextKitConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D78124540883004EC040 /* MPITextKitConst.m */; };
-		3D87D78624540889004EC040 /* MPITextKitContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D78424540888004EC040 /* MPITextKitContext.mm */; };
 		3D87D78724540889004EC040 /* MPITextKitContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D78524540888004EC040 /* MPITextKitContext.h */; };
 		3D87D7892454088F004EC040 /* MPITextKitMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D7882454088F004EC040 /* MPITextKitMacro.h */; };
 		3D87D78C24540895004EC040 /* MPITextLayoutManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D78A24540894004EC040 /* MPITextLayoutManager.h */; };
@@ -64,7 +62,6 @@
 		3D87D7A1245408AA004EC040 /* MPITextRenderAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D799245408AA004EC040 /* MPITextRenderAttributes.h */; };
 		3D87D7A2245408AA004EC040 /* MPITextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D79A245408AA004EC040 /* MPITextParser.m */; };
 		3D87D7A3245408AA004EC040 /* MPITextRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D79B245408AA004EC040 /* MPITextRenderer.h */; };
-		3D87D7A4245408AA004EC040 /* MPITextRendererKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D79C245408AA004EC040 /* MPITextRendererKey.mm */; };
 		3D87D7A5245408AA004EC040 /* MPITextRenderAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D79D245408AA004EC040 /* MPITextRenderAttributes.m */; };
 		3D87D7A8245408B2004EC040 /* MPITextSelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D7A6245408B2004EC040 /* MPITextSelectionView.h */; };
 		3D87D7A9245408B2004EC040 /* MPITextSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D7A7245408B2004EC040 /* MPITextSelectionView.m */; };
@@ -83,6 +80,9 @@
 		3D87D7C5245408CC004EC040 /* UIView+MPITextKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D7BD245408CC004EC040 /* UIView+MPITextKit.h */; };
 		3D87D7C6245408CC004EC040 /* UIView+MPITextKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D7BE245408CC004EC040 /* UIView+MPITextKit.m */; };
 		3D87D7C7245408CC004EC040 /* NSMutableParagraphStyle+MPITextKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D7BF245408CC004EC040 /* NSMutableParagraphStyle+MPITextKit.h */; };
+		3D87D80924541036004EC040 /* MPITextKitContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D78424540888004EC040 /* MPITextKitContext.m */; };
+		3D87D80A24541042004EC040 /* MPITextHashing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D76D2454084F004EC040 /* MPITextHashing.m */; };
+		3D87D80B24541063004EC040 /* MPITextRendererKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D79C245408AA004EC040 /* MPITextRendererKey.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,7 +129,7 @@
 		3D87D76724540845004EC040 /* MPITextGeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextGeometryHelpers.h; sourceTree = "<group>"; };
 		3D87D76824540845004EC040 /* MPITextGeometryHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextGeometryHelpers.m; sourceTree = "<group>"; };
 		3D87D76C2454084F004EC040 /* MPITextHashing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextHashing.h; sourceTree = "<group>"; };
-		3D87D76D2454084F004EC040 /* MPITextHashing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MPITextHashing.mm; sourceTree = "<group>"; };
+		3D87D76D2454084F004EC040 /* MPITextHashing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextHashing.m; sourceTree = "<group>"; };
 		3D87D77024540859004EC040 /* MPITextInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextInput.h; sourceTree = "<group>"; };
 		3D87D77124540859004EC040 /* MPITextInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextInput.m; sourceTree = "<group>"; };
 		3D87D77424540867004EC040 /* MPITextInteractionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPITextInteractionManager.h; path = Sources/MPITextInteractionManager.h; sourceTree = SOURCE_ROOT; };
@@ -140,7 +140,7 @@
 		3D87D77D2454087C004EC040 /* MPITextKitBugFixer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPITextKitBugFixer.m; path = Sources/MPITextKitBugFixer.m; sourceTree = SOURCE_ROOT; };
 		3D87D78024540883004EC040 /* MPITextKitConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextKitConst.h; sourceTree = "<group>"; };
 		3D87D78124540883004EC040 /* MPITextKitConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextKitConst.m; sourceTree = "<group>"; };
-		3D87D78424540888004EC040 /* MPITextKitContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MPITextKitContext.mm; path = Sources/MPITextKitContext.mm; sourceTree = SOURCE_ROOT; };
+		3D87D78424540888004EC040 /* MPITextKitContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPITextKitContext.m; path = Sources/MPITextKitContext.m; sourceTree = SOURCE_ROOT; };
 		3D87D78524540888004EC040 /* MPITextKitContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPITextKitContext.h; path = Sources/MPITextKitContext.h; sourceTree = SOURCE_ROOT; };
 		3D87D7882454088F004EC040 /* MPITextKitMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextKitMacro.h; sourceTree = "<group>"; };
 		3D87D78A24540894004EC040 /* MPITextLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPITextLayoutManager.h; path = Sources/MPITextLayoutManager.h; sourceTree = SOURCE_ROOT; };
@@ -155,7 +155,7 @@
 		3D87D799245408AA004EC040 /* MPITextRenderAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPITextRenderAttributes.h; path = Sources/MPITextRenderAttributes.h; sourceTree = SOURCE_ROOT; };
 		3D87D79A245408AA004EC040 /* MPITextParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPITextParser.m; path = Sources/MPITextParser.m; sourceTree = SOURCE_ROOT; };
 		3D87D79B245408AA004EC040 /* MPITextRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPITextRenderer.h; path = Sources/MPITextRenderer.h; sourceTree = SOURCE_ROOT; };
-		3D87D79C245408AA004EC040 /* MPITextRendererKey.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MPITextRendererKey.mm; path = Sources/MPITextRendererKey.mm; sourceTree = SOURCE_ROOT; };
+		3D87D79C245408AA004EC040 /* MPITextRendererKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPITextRendererKey.m; path = Sources/MPITextRendererKey.m; sourceTree = SOURCE_ROOT; };
 		3D87D79D245408AA004EC040 /* MPITextRenderAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPITextRenderAttributes.m; path = Sources/MPITextRenderAttributes.m; sourceTree = SOURCE_ROOT; };
 		3D87D7A6245408B2004EC040 /* MPITextSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextSelectionView.h; sourceTree = "<group>"; };
 		3D87D7A7245408B2004EC040 /* MPITextSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextSelectionView.m; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 				3D87D77C2454087C004EC040 /* MPITextKitBugFixer.h */,
 				3D87D77D2454087C004EC040 /* MPITextKitBugFixer.m */,
 				3D87D78524540888004EC040 /* MPITextKitContext.h */,
-				3D87D78424540888004EC040 /* MPITextKitContext.mm */,
+				3D87D78424540888004EC040 /* MPITextKitContext.m */,
 				3D87D78A24540894004EC040 /* MPITextLayoutManager.h */,
 				3D87D78B24540894004EC040 /* MPITextLayoutManager.m */,
 				3D87D798245408AA004EC040 /* MPITextParser.h */,
@@ -316,7 +316,7 @@
 				3D87D79B245408AA004EC040 /* MPITextRenderer.h */,
 				3D87D797245408A9004EC040 /* MPITextRenderer.m */,
 				3D87D796245408A9004EC040 /* MPITextRendererKey.h */,
-				3D87D79C245408AA004EC040 /* MPITextRendererKey.mm */,
+				3D87D79C245408AA004EC040 /* MPITextRendererKey.m */,
 				3D87D7AE245408C2004EC040 /* MPITextTailTruncater.h */,
 				3D87D7AF245408C2004EC040 /* MPITextTailTruncater.m */,
 				3D87D7B2245408C2004EC040 /* MPITextTruncating.h */,
@@ -335,7 +335,7 @@
 				3D87D76724540845004EC040 /* MPITextGeometryHelpers.h */,
 				3D87D76824540845004EC040 /* MPITextGeometryHelpers.m */,
 				3D87D76C2454084F004EC040 /* MPITextHashing.h */,
-				3D87D76D2454084F004EC040 /* MPITextHashing.mm */,
+				3D87D76D2454084F004EC040 /* MPITextHashing.m */,
 				3D87D78024540883004EC040 /* MPITextKitConst.h */,
 				3D87D78124540883004EC040 /* MPITextKitConst.m */,
 				3D87D7882454088F004EC040 /* MPITextKitMacro.h */,
@@ -490,10 +490,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D87D80B24541063004EC040 /* MPITextRendererKey.m in Sources */,
+				3D87D80A24541042004EC040 /* MPITextHashing.m in Sources */,
+				3D87D80924541036004EC040 /* MPITextKitContext.m in Sources */,
 				3D87D7B5245408C2004EC040 /* MPITextTruncationInfo.m in Sources */,
 				3D87D78324540883004EC040 /* MPITextKitConst.m in Sources */,
 				3D87D75D24540821004EC040 /* MPITextDebugOption.m in Sources */,
-				3D87D78624540889004EC040 /* MPITextKitContext.mm in Sources */,
 				3D87D7582454081C004EC040 /* MPITextCache.m in Sources */,
 				3D87D7A9245408B2004EC040 /* MPITextSelectionView.m in Sources */,
 				3D87D73C245407B8004EC040 /* MPITextAsyncLayer.m in Sources */,
@@ -501,12 +503,10 @@
 				3D87D7612454082D004EC040 /* MPITextDefaultsValueHelpers.m in Sources */,
 				3D87D77324540859004EC040 /* MPITextInput.m in Sources */,
 				3D87D7912454089B004EC040 /* MPITextLink.m in Sources */,
-				3D87D76F2454084F004EC040 /* MPITextHashing.mm in Sources */,
 				3D87D77A24540867004EC040 /* MPITextInteractiveGestureRecognizer.m in Sources */,
 				3D87D76424540833004EC040 /* MPITextEffectWindow.m in Sources */,
 				3D87D794245408A2004EC040 /* MPITextMagnifier.m in Sources */,
 				3D87D79F245408AA004EC040 /* MPITextRenderer.m in Sources */,
-				3D87D7A4245408AA004EC040 /* MPITextRendererKey.mm in Sources */,
 				3D87D76B24540845004EC040 /* MPITextGeometryHelpers.m in Sources */,
 				3D87D73E245407B8004EC040 /* MPILabel.m in Sources */,
 				3D87D7C6245408CC004EC040 /* UIView+MPITextKit.m in Sources */,
