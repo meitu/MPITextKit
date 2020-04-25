@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MPITextKit'
-  s.version          = '0.1.5'
+  s.version          = '0.1.6'
   s.summary          = 'Powerful text framework for iOS to display text based on TextKit.'
 
 # This description is used to generate tags and improve search results.
@@ -26,17 +26,8 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'Sources/**/*.{h,m,mm}'
-  s.public_header_files = [
-    'Sources/*.h',
-    'Sources/Core/*.h',
-    'Sources/Components/*.h',
-    'Sources/Attributes/*.h',
-    'Sources/Categories/*.h',
-    'Sources/Utils/*.h',
-  ]
+  s.source_files = 'Sources/**/*.{h,m}'
 
-  s.library = 'c++'
   s.frameworks = 'UIKit', 'CoreFoundation','CoreText', 'QuartzCore', 'Accelerate'
   # s.dependency 'AFNetworking', '~> 2.3'
 end

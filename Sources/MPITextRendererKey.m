@@ -7,7 +7,6 @@
 //
 
 #import "MPITextRendererKey.h"
-#import <iostream>
 #import "MPITextRenderAttributes.h"
 #import "MPITextHashing.h"
 #import "MPITextEqualityHelpers.h"

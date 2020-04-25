@@ -17,16 +17,7 @@
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "Sources/**/*.{h,m,mm}",
-  "public_header_files": [
-    "Sources/*.h",
-    "Sources/Core/*.h",
-    "Sources/Components/*.h",
-    "Sources/Attributes/*.h",
-    "Sources/Categories/*.h",
-    "Sources/Utils/*.h"
-  ],
-  "libraries": "c++",
+  "source_files": "Sources/**/*.{h,m}",
   "frameworks": [
     "UIKit",
     "CoreFoundation",
