@@ -82,7 +82,7 @@
 		3D87D80924541036004EC040 /* MPITextKitContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D78424540888004EC040 /* MPITextKitContext.m */; };
 		3D87D80A24541042004EC040 /* MPITextHashing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D76D2454084F004EC040 /* MPITextHashing.m */; };
 		3D87D80B24541063004EC040 /* MPITextRendererKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D79C245408AA004EC040 /* MPITextRendererKey.m */; };
-		3D87D84F24541B79004EC040 /* MPITextKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D84E24541B79004EC040 /* MPITextKit.h */; };
+		3D87D85A245425DC004EC040 /* MPITextKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D859245425DC004EC040 /* MPITextKit.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,8 +172,8 @@
 		3D87D7BD245408CC004EC040 /* UIView+MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+MPITextKit.h"; path = "Sources/UIView+MPITextKit.h"; sourceTree = SOURCE_ROOT; };
 		3D87D7BE245408CC004EC040 /* UIView+MPITextKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+MPITextKit.m"; path = "Sources/UIView+MPITextKit.m"; sourceTree = SOURCE_ROOT; };
 		3D87D7BF245408CC004EC040 /* NSMutableParagraphStyle+MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableParagraphStyle+MPITextKit.h"; path = "Sources/NSMutableParagraphStyle+MPITextKit.h"; sourceTree = SOURCE_ROOT; };
-		3D87D84E24541B79004EC040 /* MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPITextKit.h; path = Framework/MPITextKit.h; sourceTree = SOURCE_ROOT; };
 		3D87D85024541B84004EC040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Framework/Info.plist; sourceTree = SOURCE_ROOT; };
+		3D87D859245425DC004EC040 /* MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,7 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				3D87D85024541B84004EC040 /* Info.plist */,
-				3D87D84E24541B79004EC040 /* MPITextKit.h */,
+				3D87D859245425DC004EC040 /* MPITextKit.h */,
 				3D87D73324540734004EC040 /* Attributes */,
 				3D87D73424540741004EC040 /* Categories */,
 				3D87D7352454074E004EC040 /* Components */,
@@ -382,7 +382,7 @@
 				3D87D7592454081C004EC040 /* MPITextCache.h in Headers */,
 				3D87D76A24540845004EC040 /* MPITextGeometryHelpers.h in Headers */,
 				3D87D7A8245408B2004EC040 /* MPITextSelectionView.h in Headers */,
-				3D87D84F24541B79004EC040 /* MPITextKit.h in Headers */,
+				3D87D85A245425DC004EC040 /* MPITextKit.h in Headers */,
 				3D87D76924540845004EC040 /* MPITextEqualityHelpers.h in Headers */,
 				3D87D7C3245408CC004EC040 /* NSMutableAttributedString+MPITextKit.h in Headers */,
 				3D87D79E245408AA004EC040 /* MPITextRendererKey.h in Headers */,
