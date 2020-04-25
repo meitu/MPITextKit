@@ -42,6 +42,7 @@
     if (!object) {
       return NO;
     }
+    // NOTE: Skip the class check for this specialized, internal Key object.
     
     return
     MPITextObjectIsEqual(_attributes, object->_attributes)  &&
