@@ -2,6 +2,8 @@
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/MPITextKit/master/LICENSE)&nbsp;
 [![CocoaPods](https://img.shields.io/cocoapods/v/MPITextKit.svg?style=flat)](http://cocoapods.org/pods/MPITextKit)&nbsp;
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![SPM supported](https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat)](https://swift.org/package-manager)
 [![Platform](https://img.shields.io/cocoapods/p/MPITextKit.svg?style=flat)](http://cocoadocs.org/docsets/MPITextKit)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS%209%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
@@ -35,8 +37,31 @@ Powerful text framework for iOS to display rich text based on TextKit, inspired 
 
 ## Installation
 
+MPITextKit supports multiple methods for installing the library in a project.
+
+
+### Installation with CocoaPods
+
 ```
 pod 'MPITextKit'
+```
+
+### Installation with Swift Package Manager
+
+Once you have your Swift package set up, adding MPITextKit as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/meitu/MPITextKit.git")
+]
+```
+
+### Installation with Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate MPITextKit, add the following to your `Cartfile`.
+
+```ogdl
+github "meitu/MPITextKit"
 ```
 
 ## Usage

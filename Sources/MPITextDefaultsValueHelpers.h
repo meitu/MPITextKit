@@ -6,7 +6,7 @@
 //  Copyright © 2019 美图网. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 FOUNDATION_EXTERN NSDictionary *MPITextDefaultLinkTextAttributes(void);
 

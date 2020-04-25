@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MPITextKit'
-  s.version          = '0.1.5'
+  s.version          = '0.1.6'
   s.summary          = 'Powerful text framework for iOS to display text based on TextKit.'
 
 # This description is used to generate tags and improve search results.
@@ -26,24 +26,8 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'MPITextKit/Classes/**/*.{h,m,mm}'
-  s.public_header_files = [
-    'MPITextKit/Classes/*.h', 
-    'MPITextKit/Classes/Core/*.h', 
-    'MPITextKit/Classes/Components/*.h',
-    'MPITextKit/Classes/Attributes/*.h', 
-    'MPITextKit/Classes/Categories/*.h', 
-    'MPITextKit/Classes/Utils/*.h', 
-  ]
-  # s.resource_bundles = {
-  #   'MPITextKit' => ['MPITextKit/Assets/*.png']
-  # }
+  s.source_files = 'Sources/**/*.{h,m}'
 
-  s.library = 'c++'
   s.frameworks = 'UIKit', 'CoreFoundation','CoreText', 'QuartzCore', 'Accelerate'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.pod_target_xcconfig = {
-    'CLANG_CXX_LANGUAGE_STANDARD' => 'c++11',
-    'CLANG_CXX_LIBRARY' => 'libc++'
-  }
 end

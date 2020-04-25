@@ -7,14 +7,11 @@
 //
 
 #import "MPITextRendererKey.h"
-#import <iostream>
 #import "MPITextRenderAttributes.h"
 #import "MPITextHashing.h"
 #import "MPITextEqualityHelpers.h"
 
-@implementation MPITextRendererKey {
-    std::mutex _m;
-}
+@implementation MPITextRendererKey
 
 - (instancetype)initWithAttributes:(MPITextRenderAttributes *)attributes constrainedSize:(CGSize)constrainedSize {
     self = [super init];
@@ -25,9 +22,7 @@
     return self;
 }
 
-- (NSUInteger)hash
-{
-    std::lock_guard<std::mutex> _l(_m);
+- (NSUInteger)hash {
     struct {
         size_t attributesHash;
         CGSize constrainedSize;
@@ -38,18 +33,15 @@
     return MPITextHashBytes(&data, sizeof(data));
 }
 
-- (BOOL)isEqual:(MPITextRendererKey *)object
-{
+- (BOOL)isEqual:(MPITextRendererKey *)object {
     if (self == object) {
         return YES;
     }
     
+    if (!object) {
+      return NO;
+    }
     // NOTE: Skip the class check for this specialized, internal Key object.
-    
-    // Lock both objects, avoiding deadlock.
-    std::lock(_m, object->_m);
-    std::lock_guard<std::mutex> lk1(_m, std::adopt_lock);
-    std::lock_guard<std::mutex> lk2(object->_m, std::adopt_lock);
     
     return
     MPITextObjectIsEqual(_attributes, object->_attributes)  &&
