@@ -35,8 +35,31 @@ Powerful text framework for iOS to display rich text based on TextKit, inspired 
 
 ## Installation
 
+MPITextKit supports multiple methods for installing the library in a project.
+
+
+### Installation with CocoaPods
+
 ```
 pod 'MPITextKit'
+```
+
+### Installation with Swift Package Manager
+
+Once you have your Swift package set up, adding MPITextKit as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/meitu/MPITextKit.git")
+]
+```
+
+### Installation with Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate MPITextKit, add the following to your `Cartfile`.
+
+```ogdl
+github "meitu/MPITextKit"
 ```
 
 ## Usage
