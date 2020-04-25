@@ -26,18 +26,15 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'MPITextKit/Classes/**/*.{h,m,mm}'
+  s.source_files = 'Sources/**/*.{h,m,mm}'
   s.public_header_files = [
-    'MPITextKit/Classes/*.h', 
-    'MPITextKit/Classes/Core/*.h', 
-    'MPITextKit/Classes/Components/*.h',
-    'MPITextKit/Classes/Attributes/*.h', 
-    'MPITextKit/Classes/Categories/*.h', 
-    'MPITextKit/Classes/Utils/*.h', 
+    'Sources/*.h',
+    'Sources/Core/*.h',
+    'Sources/Components/*.h',
+    'Sources/Attributes/*.h',
+    'Sources/Categories/*.h',
+    'Sources/Utils/*.h',
   ]
-  # s.resource_bundles = {
-  #   'MPITextKit' => ['MPITextKit/Assets/*.png']
-  # }
 
   s.library = 'c++'
   s.frameworks = 'UIKit', 'CoreFoundation','CoreText', 'QuartzCore', 'Accelerate'
