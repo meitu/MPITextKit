@@ -1,0 +1,5 @@
+framework module MPITextKit {
+    umbrella header "MPITextKit.h"
+    export *
+    module * { export * }
+}

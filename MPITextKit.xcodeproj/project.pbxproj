@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3D3EDD092453FC18009DB791 /* MPITextKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3EDCFF2453FC18009DB791 /* MPITextKit.framework */; };
 		3D3EDD0E2453FC18009DB791 /* MPITextKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3EDD0D2453FC18009DB791 /* MPITextKitTests.m */; };
-		3D3EDD842453FCA5009DB791 /* MPITextKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3EDD362453FCA4009DB791 /* MPITextKit.h */; };
 		3D3EDDB42453FE5C009DB791 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D3EDDB32453FE5C009DB791 /* Info.plist */; };
 		3D87D73C245407B8004EC040 /* MPITextAsyncLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D738245407B8004EC040 /* MPITextAsyncLayer.m */; };
 		3D87D73D245407B8004EC040 /* MPITextAsyncLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D739245407B8004EC040 /* MPITextAsyncLayer.h */; };
@@ -83,6 +82,7 @@
 		3D87D80924541036004EC040 /* MPITextKitContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D78424540888004EC040 /* MPITextKitContext.m */; };
 		3D87D80A24541042004EC040 /* MPITextHashing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D76D2454084F004EC040 /* MPITextHashing.m */; };
 		3D87D80B24541063004EC040 /* MPITextRendererKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D87D79C245408AA004EC040 /* MPITextRendererKey.m */; };
+		3D87D85A245425DC004EC040 /* MPITextKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D87D859245425DC004EC040 /* MPITextKit.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,8 +99,6 @@
 		3D3EDCFF2453FC18009DB791 /* MPITextKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPITextKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3EDD082453FC18009DB791 /* MPITextKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MPITextKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3EDD0D2453FC18009DB791 /* MPITextKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPITextKitTests.m; sourceTree = "<group>"; };
-		3D3EDD362453FCA4009DB791 /* MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextKit.h; sourceTree = "<group>"; };
-		3D3EDD682453FCA5009DB791 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3EDDB32453FE5C009DB791 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D87D738245407B8004EC040 /* MPITextAsyncLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITextAsyncLayer.m; sourceTree = "<group>"; };
 		3D87D739245407B8004EC040 /* MPITextAsyncLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextAsyncLayer.h; sourceTree = "<group>"; };
@@ -174,6 +172,8 @@
 		3D87D7BD245408CC004EC040 /* UIView+MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+MPITextKit.h"; path = "Sources/UIView+MPITextKit.h"; sourceTree = SOURCE_ROOT; };
 		3D87D7BE245408CC004EC040 /* UIView+MPITextKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+MPITextKit.m"; path = "Sources/UIView+MPITextKit.m"; sourceTree = SOURCE_ROOT; };
 		3D87D7BF245408CC004EC040 /* NSMutableParagraphStyle+MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableParagraphStyle+MPITextKit.h"; path = "Sources/NSMutableParagraphStyle+MPITextKit.h"; sourceTree = SOURCE_ROOT; };
+		3D87D85024541B84004EC040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Framework/Info.plist; sourceTree = SOURCE_ROOT; };
+		3D87D859245425DC004EC040 /* MPITextKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITextKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,13 +225,13 @@
 		3D3EDD192453FCA4009DB791 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3D87D85024541B84004EC040 /* Info.plist */,
+				3D87D859245425DC004EC040 /* MPITextKit.h */,
 				3D87D73324540734004EC040 /* Attributes */,
 				3D87D73424540741004EC040 /* Categories */,
 				3D87D7352454074E004EC040 /* Components */,
 				3D87D73624540758004EC040 /* Core */,
 				3D87D73724540760004EC040 /* Utils */,
-				3D3EDD682453FCA5009DB791 /* Info.plist */,
-				3D3EDD362453FCA4009DB791 /* MPITextKit.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -360,7 +360,6 @@
 				3D87D77824540867004EC040 /* MPITextInteractionManager.h in Headers */,
 				3D87D795245408A2004EC040 /* MPITextMagnifier.h in Headers */,
 				3D87D78224540883004EC040 /* MPITextKitConst.h in Headers */,
-				3D3EDD842453FCA5009DB791 /* MPITextKit.h in Headers */,
 				3D87D75024540808004EC040 /* MPITextAttributes.h in Headers */,
 				3D87D7C2245408CC004EC040 /* NSAttributedString+MPITextKit.h in Headers */,
 				3D87D743245407F5004EC040 /* MPITextAttachment.h in Headers */,
@@ -383,6 +382,7 @@
 				3D87D7592454081C004EC040 /* MPITextCache.h in Headers */,
 				3D87D76A24540845004EC040 /* MPITextGeometryHelpers.h in Headers */,
 				3D87D7A8245408B2004EC040 /* MPITextSelectionView.h in Headers */,
+				3D87D85A245425DC004EC040 /* MPITextKit.h in Headers */,
 				3D87D76924540845004EC040 /* MPITextEqualityHelpers.h in Headers */,
 				3D87D7C3245408CC004EC040 /* NSMutableAttributedString+MPITextKit.h in Headers */,
 				3D87D79E245408AA004EC040 /* MPITextRendererKey.h in Headers */,
@@ -671,7 +671,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -679,6 +679,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.6;
+				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meitu.mtmv.MPITextKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -695,7 +696,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -703,6 +704,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.6;
+				MODULEMAP_FILE = "$(PROJECT_DIR)/Framework/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meitu.mtmv.MPITextKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
