@@ -5,3 +5,4 @@ IDEFindNavigatorScopes.plist
 *.xcbkptlist
 *.xcuserstate
 Carthage/
+.swiftpm
