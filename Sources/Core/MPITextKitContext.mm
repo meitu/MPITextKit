@@ -7,7 +7,7 @@
 //
 
 #import "MPITextKitContext.h"
-#import "MPITextThread.h"
+#import <pthread.h>
 #import "MPITextKitBugFixer.h"
 #import "MPITextKitConst.h"
 
@@ -21,7 +21,11 @@
 
 @implementation MPITextKitContext {
     // All TextKit operations (even non-mutative ones) must be executed serially.
-    std::shared_ptr<MPITextKit::Mutex> __instanceLock__;
+    pthread_mutex_t _lock;
+}
+
+- (void)dealloc {
+    pthread_mutex_destroy(&_lock);
 }
 
 - (instancetype)initWithAttributedString:(NSAttributedString *)attributedString
@@ -33,11 +37,14 @@
 {
     if (self = [super init]) {
         // Concurrently initialising TextKit components crashes (rdar://18448377) so we use a global lock.
-        // Allocate __staticMutex on the heap to prevent destruction at app exit (https://github.com/TextureGroup/Texture/issues/136)
-        static MPITextKit::StaticMutex& __staticMutex = *new MPITextKit::StaticMutex;
-        MPITextKit::StaticMutexLocker l(__staticMutex);
+        static pthread_mutex_t mutex;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            pthread_mutex_init(&mutex, NULL);
+        });
+        pthread_mutex_lock(&mutex);
         
-        __instanceLock__ = std::make_shared<MPITextKit::Mutex>();
+        pthread_mutex_init(&_lock, NULL);
         
         // Create the TextKit component stack with our default configuration.
         _layoutManager = [[MPITextLayoutManager alloc] init];
@@ -61,18 +68,20 @@
         }];
         _textStorage = attributedText ? [[NSTextStorage alloc] initWithAttributedString:attributedText] : [NSTextStorage new];
         [_textStorage addLayoutManager:_layoutManager];
+        
+        pthread_mutex_unlock(&mutex);
     }
     return self;
 }
 
 - (void)performBlockWithLockedTextKitComponents:(void (^)(MPITextLayoutManager *,
                                                           NSTextStorage *,
-                                                          NSTextContainer *))block
-{
-    MPITextKit::MutexSharedLocker l(__instanceLock__);
+                                                          NSTextContainer *))block {
+    pthread_mutex_lock(&_lock);
     if (block) {
         block(_layoutManager, _textStorage, _textContainer);
     }
+    pthread_mutex_unlock(&_lock);
 }
 
 @end
