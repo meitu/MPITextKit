@@ -39,8 +39,4 @@ Pod::Spec.new do |s|
   s.library = 'c++'
   s.frameworks = 'UIKit', 'CoreFoundation','CoreText', 'QuartzCore', 'Accelerate'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.pod_target_xcconfig = {
-    'CLANG_CXX_LANGUAGE_STANDARD' => 'c++11',
-    'CLANG_CXX_LIBRARY' => 'libc++'
-  }
 end
