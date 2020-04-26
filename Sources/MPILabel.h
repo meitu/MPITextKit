@@ -146,7 +146,7 @@ CGSize MPITextSuggestFrameSizeForAttributes(MPITextRenderAttributes *attributes,
 /**
  Composed by truncationAttributedToken and additionalTruncationAttributedMessage.
  */
-@property (nullable, nonatomic, readonly) NSAttributedString *truncationAttributedText;
+@property (null_resettable, nonatomic, readonly) NSAttributedString *truncationAttributedText;
 
 /**
 Whether or not the text is truncated. It's expensive if text not rendered.
