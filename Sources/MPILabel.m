@@ -243,7 +243,6 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     
     self.layer.contentsScale = MPITextScreenScale();
     self.contentMode = UIViewContentModeRedraw;
-    self.backgroundColor = [UIColor clearColor];
     self.opaque = NO;
     
     _highlightedLinkTextAttributes = MPITextDefaultHighlightedLinkTextAttributes();
