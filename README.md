@@ -3,7 +3,7 @@
 [![build](https://github.com/meitu/MPITextKit/workflows/build/badge.svg)](https://github.com/meitu/MPITextKit/actions?query=workflow%3Abuild)&nbsp;
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/MPITextKit/master/LICENSE)&nbsp;
 [![CocoaPods](https://img.shields.io/cocoapods/v/MPITextKit.svg?style=flat)](http://cocoapods.org/pods/MPITextKit)&nbsp;
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)&nbsp;
 [![SPM supported](https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat)](https://swift.org/package-manager)&nbsp;
 [![Platform](https://img.shields.io/cocoapods/p/MPITextKit.svg?style=flat)](http://cocoadocs.org/docsets/MPITextKit)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS%209%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;

@@ -146,7 +146,7 @@ CGSize MPITextSuggestFrameSizeForAttributes(MPITextRenderAttributes *attributes,
 /**
  Composed by truncationAttributedToken and additionalTruncationAttributedMessage.
  */
-@property (nullable, nonatomic, readonly) NSAttributedString *truncationAttributedText;
+@property (null_resettable, nonatomic, readonly) NSAttributedString *truncationAttributedText;
 
 /**
 Whether or not the text is truncated. It's expensive if text not rendered.
@@ -301,13 +301,13 @@ Whether or not the text is truncated. It's expensive if text not rendered.
 /// @param label  Reference Label.
 - (BOOL)menuVisibleForLabel:(MPILabel *)label;
 
-/// Custom menu showing. You should implement menuVisibleForLabel:.
+/// Customize menu showing. You should implement menuVisibleForLabel:.
 /// @param label Reference label.
 /// @param menuItems The custom menu items for the menu.
 /// @param targetRect A rectangle that defines the area that is to be the target of the menu commands.
 - (void)label:(MPILabel *)label showMenuWithMenuItems:(NSArray<UIMenuItem *> *)menuItems targetRect:(CGRect)targetRect;
 
-/// Custom menu hiding.
+/// Customize menu hiding.
 /// @param label Reference label.
 - (void)labelHideMenu:(MPILabel *)label;
 

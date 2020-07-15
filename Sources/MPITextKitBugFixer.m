@@ -33,11 +33,11 @@
     NSTextStorage *textStorage = layoutManager.textStorage;
     NSRange characterRange = [layoutManager characterRangeForGlyphRange:glyphRange actualGlyphRange:NULL];
 
+    __block UIFont *maximumLineHeightFont = nil;
     __block CGFloat maximumLineHeight = 0;
     __block CGFloat maximumLineSpacing = 0;
     __block CGFloat maximumParagraphSpacingBefore = 0;
     __block CGFloat maximumParagraphSpacing = 0;
-    __block CGFloat maximumBaselineOffset = 0;
     [textStorage enumerateAttributesInRange:characterRange options:kNilOptions usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
         UIFont *font = attrs[MPITextOriginalFontAttributeName]; // The actual height is NSOriginalFont lineHeight.
         if (!font) {
@@ -47,6 +47,7 @@
 
         CGFloat lineHeight = [self lineHeightForFont:font paragraphStyle:paragraphStyle];
         if (lineHeight > maximumLineHeight) {
+            maximumLineHeightFont = font;
             maximumLineHeight = lineHeight;
         }
 
@@ -63,11 +64,6 @@
         CGFloat paragraphSpacing = paragraphStyle.paragraphSpacing;
         if (paragraphSpacing > maximumParagraphSpacing) {
             maximumParagraphSpacing = paragraphSpacing;
-        }
-
-        CGFloat baselineOffset = font.ascender;
-        if (baselineOffset > maximumBaselineOffset) {
-            maximumBaselineOffset = baselineOffset;
         }
     }];
 
@@ -99,7 +95,7 @@
 
     *lineFragmentRect = rect;
     *lineFragmentUsedRect = usedRect;
-    *baselineOffset = MAX(maximumParagraphSpacingBefore + maximumBaselineOffset, *baselineOffset);
+    *baselineOffset = MAX(maximumLineHeight + maximumLineHeightFont.descender, *baselineOffset);
     
     /**
      From apple's doc:
