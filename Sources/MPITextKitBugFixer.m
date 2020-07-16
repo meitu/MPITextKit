@@ -36,14 +36,15 @@
     __block UIFont *maximumLineHeightFont = nil;
     __block CGFloat maximumLineHeight = 0;
     __block CGFloat maximumLineSpacing = 0;
-    __block CGFloat maximumParagraphSpacingBefore = 0;
-    __block CGFloat maximumParagraphSpacing = 0;
+    __block NSParagraphStyle *paragraphStyle = nil;
     [textStorage enumerateAttributesInRange:characterRange options:kNilOptions usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
         UIFont *font = attrs[MPITextOriginalFontAttributeName]; // The actual height is NSOriginalFont lineHeight.
         if (!font) {
             font = attrs[NSFontAttributeName];
         }
-        NSParagraphStyle *paragraphStyle = attrs[NSParagraphStyleAttributeName];
+        if (!paragraphStyle) {
+            paragraphStyle = attrs[NSParagraphStyleAttributeName];
+        }
 
         CGFloat lineHeight = [self lineHeightForFont:font paragraphStyle:paragraphStyle];
         if (lineHeight > maximumLineHeight) {
@@ -55,47 +56,42 @@
         if (lineSpacing > maximumLineSpacing) {
             maximumLineSpacing = lineSpacing;
         }
-
-        CGFloat paragraphSpacingBefore = paragraphStyle.paragraphSpacingBefore;
-        if (paragraphSpacingBefore > maximumParagraphSpacingBefore) {
-            maximumParagraphSpacingBefore = paragraphSpacingBefore;
-        }
-
-        CGFloat paragraphSpacing = paragraphStyle.paragraphSpacing;
-        if (paragraphSpacing > maximumParagraphSpacing) {
-            maximumParagraphSpacing = paragraphSpacing;
-        }
     }];
-
-    // paragraphSpacing
-    if (maximumParagraphSpacing > 0) {
-        NSRange charaterRange = [layoutManager characterRangeForGlyphRange:NSMakeRange(NSMaxRange(glyphRange) - 1, 1) actualGlyphRange:NULL];
-        NSAttributedString *attributedString = [textStorage attributedSubstringFromRange:charaterRange];
-        if (![attributedString.string isEqualToString:@"\n"]) {
-            maximumParagraphSpacing = 0;
+    
+    // paragraphSpacing before
+    CGFloat paragraphSpacingBefore = 0;
+    if (glyphRange.location > 0) {
+        if (paragraphStyle.paragraphSpacingBefore > FLT_EPSILON || paragraphStyle.paragraphSpacingBefore < -FLT_EPSILON) {
+            NSRange lastLineEndRange = NSMakeRange(glyphRange.location - 1, 1);
+            NSRange charaterRange = [layoutManager characterRangeForGlyphRange:lastLineEndRange actualGlyphRange:NULL];
+            NSAttributedString *attributedString = [textStorage attributedSubstringFromRange:charaterRange];
+            if ([attributedString.string isEqualToString:@"\n"]) {
+                paragraphSpacingBefore = paragraphStyle.paragraphSpacingBefore;
+            }
         }
     }
 
-    // paragraphSpacing before
-    if (glyphRange.location > 0 && maximumParagraphSpacingBefore > 0) {
-        NSRange lastLineEndRange = NSMakeRange(glyphRange.location - 1, 1);
-        NSRange charaterRange = [layoutManager characterRangeForGlyphRange:lastLineEndRange actualGlyphRange:NULL];
+    // paragraphSpacing
+    CGFloat paragraphSpacing = 0;
+    if (paragraphStyle.paragraphSpacing > FLT_EPSILON) {
+        NSRange charaterRange = [layoutManager characterRangeForGlyphRange:NSMakeRange(NSMaxRange(glyphRange) - 1, 1) actualGlyphRange:NULL];
         NSAttributedString *attributedString = [textStorage attributedSubstringFromRange:charaterRange];
-        if (![attributedString.string isEqualToString:@"\n"]) {
-            maximumParagraphSpacingBefore = 0;
+        if ([attributedString.string isEqualToString:@"\n"]) {
+            paragraphSpacing = paragraphStyle.paragraphSpacing;
         }
     }
 
     CGRect rect = *lineFragmentRect;
     CGRect usedRect = *lineFragmentUsedRect;
 
-    usedRect.origin.y += maximumParagraphSpacingBefore;
-    usedRect.size.height = MAX(maximumLineHeight, usedRect.size.height);
-    rect.size.height = maximumParagraphSpacingBefore + usedRect.size.height + maximumLineSpacing + maximumParagraphSpacing;
+    CGFloat usedHeight = MAX(maximumLineHeight, usedRect.size.height);
+    rect.size.height = paragraphSpacingBefore + usedHeight + maximumLineSpacing + paragraphSpacing;
+    usedRect.size.height = usedHeight;
 
     *lineFragmentRect = rect;
     *lineFragmentUsedRect = usedRect;
-    *baselineOffset = MAX(maximumLineHeight + maximumLineHeightFont.descender, *baselineOffset);
+    // When an attachment is included, it is wrong.
+//    *baselineOffset = maximumParagraphSpacingBefore + maximumLineHeight + maximumLineHeightFont.descender;
     
     /**
      From apple's doc:

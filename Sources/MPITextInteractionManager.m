@@ -298,13 +298,7 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     MPITextInteractableView *interactableView = self.interactableView;
     CGPoint location = [gestureRecognizer locationInView:interactableView];
-    if (gestureRecognizer == self.grabberPanGestureRecognizer) {
-        if (!interactableView.isSelectable) {
-            return NO;
-        }
-        self.trackingGrabberType = [interactableView grabberTypeAtPoint:location];
-        return self.trackingGrabberType != MPITextSelectionGrabberTypeNone;
-    } else if (gestureRecognizer == self.interactiveGestureRecognizer) {
+    if (gestureRecognizer == self.interactiveGestureRecognizer) {
         _activeLinkRange = [self linkRangeAtPoint:location inTruncation:&_activeInTruncation];
         
         if (self.activeLinkRange.location != NSNotFound &&
@@ -318,6 +312,9 @@
         }
         
         return interactableView.isSelectable ? YES : [self hasActiveLink];
+    } else if (interactableView.isSelectable && gestureRecognizer == self.grabberPanGestureRecognizer) {
+        self.trackingGrabberType = [interactableView grabberTypeAtPoint:location];
+        return self.trackingGrabberType != MPITextSelectionGrabberTypeNone;
     }
     return NO;
 }
