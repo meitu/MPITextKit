@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSMutableArray *titles;
 @property (nonatomic, strong) NSMutableArray *classNames;
+@property(nonatomic, strong) NSMutableDictionary *storyboardIDs;
 
 @end
 
@@ -25,6 +26,7 @@
     self.title = @"✎       MPITextKit Demo       ✎";
     self.titles = @[].mutableCopy;
     self.classNames = @[].mutableCopy;
+    self.storyboardIDs = @{}.mutableCopy;
     [self addCell:@"Text Attributes" class:@"MPITextAttributesViewController"];
     [self addCell:@"Text Attachment" class:@"MPITextAttachmentViewController"];
     [self addCell:@"Text Truncating" class:@"MPITextTruncatingViewController"];
@@ -35,12 +37,18 @@
     [self addCell:@"Text Selection" class:@"MPITextSelectionViewController"];
     [self addCell:@"Size Calculation" class:@"MPITextSizeCalculationViewController"];
     [self addCell:@"Attributes Separation" class:@"MPITextAttributesSeparationViewController"];
+    [self addCell:@"Features Comparison" class:@"MPIFeaturesComparisonViewController" storyboardID:@"FeaturesComparison"];
     [self.tableView reloadData];
 }
 
 - (void)addCell:(NSString *)title class:(NSString *)className {
+    [self addCell:title class:className storyboardID:nil];
+}
+
+- (void)addCell:(NSString *)title class:(NSString *)className storyboardID:(NSString *)storyboardID {
     [self.titles addObject:title];
     [self.classNames addObject:className];
+    self.storyboardIDs[className] = storyboardID;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -54,8 +62,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Class aClass = NSClassFromString(self.classNames[indexPath.item]);
-    UIViewController *viewController = [aClass new];
+    NSString *className = self.classNames[indexPath.item];
+    Class aClass = NSClassFromString(className);
+    UIViewController *viewController = nil;
+    NSString *storyboardID = self.storyboardIDs[className];
+    if (storyboardID.length > 0) {
+        viewController = [self.storyboard instantiateViewControllerWithIdentifier:storyboardID];
+    } else {
+        viewController = [aClass new];
+    }
     viewController.title = self.titles[indexPath.row];
     [self.navigationController pushViewController:viewController animated:YES];
 }
