@@ -54,7 +54,7 @@
         attributesBuiler.lineBreakMode = NSLineBreakByTruncatingTail;
         attributesBuiler.maximumNumberOfLines = 3;
         attributesBuiler.truncationAttributedText = MPITextDefaultTruncationAttributedToken();
-        MPITextRenderer *renderer = [[MPITextRenderer alloc] initWithRenderAttributes:[attributesBuiler build] constrainedSize:CGSizeMake(CGRectGetWidth(self.view.frame), CGFLOAT_MAX)];
+        MPITextRenderer *renderer = [[MPITextRenderer alloc] initWithRenderAttributes:[attributesBuiler build] constrainedSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), CGFLOAT_MAX)];
         [textRenderers addObject:renderer];
     }
     self.strings = strings;

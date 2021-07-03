@@ -9,6 +9,18 @@
 #import "MPITextGeometryHelpers.h"
 #import "UIView+MPITextKit.h"
 
+@interface MPITextEffectWindowViewController : UIViewController
+
+@end
+
+@implementation MPITextEffectWindowViewController
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+@end
+
 @implementation MPITextEffectWindow
 
 + (instancetype)sharedWindow {
@@ -20,7 +32,7 @@
         window.userInteractionEnabled = NO;
         window.windowLevel = UIWindowLevelStatusBar + 1;
         window.hidden = NO;
-        window.rootViewController = [UIViewController new];
+        window.rootViewController = [MPITextEffectWindowViewController new];
         
         // for iOS 9:
         window.opaque = NO;
