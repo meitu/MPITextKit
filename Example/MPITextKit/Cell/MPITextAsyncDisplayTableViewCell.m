@@ -25,7 +25,7 @@
     _uiLabel = [UILabel new];
     _uiLabel.font = [UIFont systemFontOfSize:8];
     _uiLabel.numberOfLines = 3;
-    _uiLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width;
+    _uiLabel.preferredMaxLayoutWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
     
     _mpiLabel = [MPILabel new];
     _mpiLabel.font = _uiLabel.font;
