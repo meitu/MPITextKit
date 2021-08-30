@@ -29,7 +29,9 @@
         if (backed && backed.string) {
             [result appendString:backed.string];
         } else {
-            [result appendString:[string substringWithRange:range]];
+            NSRange startRange = [string rangeOfComposedCharacterSequenceAtIndex:range.location];
+            NSRange endRange = [string rangeOfComposedCharacterSequenceAtIndex:NSMaxRange(range) - 1];
+            [result appendString:[string substringWithRange:NSMakeRange(startRange.location, NSMaxRange(endRange) - startRange.location)]];
         }
     }];
     return result;
