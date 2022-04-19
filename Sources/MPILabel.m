@@ -350,11 +350,11 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
 #pragma mark - UIAccessibility
 
 - (NSString *)accessibilityLabel {
-    return self.text;
+    return [super accessibilityLabel] ? : self.text;
 }
 
 - (NSAttributedString *)accessibilityAttributedLabel {
-    return self.attributedText;
+    return [super accessibilityAttributedLabel] ? : self.attributedText;
 }
 
 #pragma mark - UIResponderStandardEditActions
