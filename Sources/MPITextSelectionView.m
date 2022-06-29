@@ -139,6 +139,7 @@
 }
 
 - (BOOL)isStartGrabberContainsPoint:(CGPoint)point {
+    if (self.isHidden) return NO;
     if (self.startGrabber.hidden) return NO;
     CGRect startRect = [self.startGrabber touchRect];
     CGRect endRect = [self.endGrabber touchRect];
@@ -151,6 +152,7 @@
 }
 
 - (BOOL)isEndGrabberContainsPoint:(CGPoint)point {
+    if (self.isHidden) return NO;
     if (self.endGrabber.hidden) return NO;
     CGRect startRect = [self.startGrabber touchRect];
     CGRect endRect = [self.endGrabber touchRect];
@@ -163,6 +165,7 @@
 }
 
 - (BOOL)isSelectionRectsContainsPoint:(CGPoint)point {
+    if (self.isHidden) return NO;
     if (self.selectionRects.count == 0) return NO;
     for (MPITextSelectionRect *rect in self.selectionRects) {
         if (CGRectContainsPoint(rect.rect, point)) return YES;
