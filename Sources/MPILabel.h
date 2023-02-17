@@ -12,11 +12,13 @@
 #import <MPITextKit/MPITextRenderAttributes.h>
 #import <MPITextKit/MPITextRenderer.h>
 #import <MPITextKit/MPITextDebugOption.h>
+#import <MPITextKit/MPITextParser.h>
 #else
 #import "MPITextAttributes.h"
 #import "MPITextRenderAttributes.h"
 #import "MPITextRenderer.h"
 #import "MPITextDebugOption.h"
+#import "MPITextParser.h"
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -73,6 +75,9 @@ CGSize MPITextSuggestFrameSizeForAttributes(MPITextRenderAttributes *attributes,
  Set it to get higher performance.
  */
 @property (nullable, nonatomic, strong) MPITextRenderer *textRenderer;
+
+
+@property (nullable, nonatomic, strong) id<MPITextParser> textParser;
 
 /**
  The text displayed by the label. Default is nil.

@@ -978,8 +978,15 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     if (MPITextObjectIsEqual(_attributedText, attributedText)) {
         return;
     }
-    
-    _attributedText = attributedText.copy;
+	
+	NSMutableAttributedString *attr = attributedText.mutableCopy;
+	NSRange newRange = _selectedRange;
+	if ([_textParser parseText:attr selectedRange:&newRange]) {
+		_attributedText = attr.copy;
+		self.selectedRange = newRange;
+	} else {
+		_attributedText = attributedText.copy;
+	}
     
     [self invalidate];
 }
@@ -992,6 +999,21 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     _textRenderer = textRenderer;
     
     [self invalidate];
+}
+
+- (void)setTextParser:(id<MPITextParser>)textParser {
+	if (_textParser == textParser || [_textParser isEqual:textParser])
+		return;
+	
+	_textParser = textParser;
+	
+	NSMutableAttributedString *attr = _attributedText.mutableCopy;
+	NSRange newRange = _selectedRange;
+	if ([textParser parseText:attr selectedRange:&newRange]) {
+		_attributedText = attr.copy;
+		self.selectedRange = newRange;
+		[self invalidate];
+	}
 }
 
 - (NSString *)text {

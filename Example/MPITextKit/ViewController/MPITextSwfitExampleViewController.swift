@@ -41,6 +41,7 @@ class MPITextSwfitExampleViewController: UIViewController {
         mpiLabel.textContainerInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
         mpiLabel.numberOfLines = 0
         mpiLabel.delegate = self
+		mpiLabel.textParser = TestParser()
         
         mpiLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(mpiLabel)
@@ -66,4 +67,18 @@ extension MPITextSwfitExampleViewController: MPILabelDelegate {
         let exLink = link as! MPIExampleLink
         print("Tapped => text: \(attributedText.attributedSubstring(from: characterRange).string)" + "value: " + String(exLink.value as! NSString) + " linkType: \(exLink.linkType)")
     }
+}
+
+@objcMembers
+class TestParser: NSObject, MPITextParser {
+	func parseText(_ text: NSMutableAttributedString?, selectedRange: NSRangePointer?) -> Bool {
+		guard let text else { return false }
+		func range() -> NSRange {
+			(text.string as NSString).range(of: "Hello")
+		}
+		while range().location != NSNotFound {
+			text.replaceCharacters(in: range(), with: "ABC")
+		}
+		return true
+	}
 }
