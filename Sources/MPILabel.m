@@ -740,6 +740,11 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
 - (NSUInteger)characterIndexForPoint:(CGPoint)point {
     MPITextRenderer *renderer = [self currentRenderer];
     point = [self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size];
+    CGFloat pointX = MIN(point.x, renderer.size.width) - 1;
+    CGFloat pointY = MIN(point.y, renderer.size.height) - 1;
+    pointX = pointX < 0 ? 1 : pointX;
+    pointY = pointY < 0 ? 1 : pointY;
+    point = CGPointMake(pointX, pointY);
     return [renderer characterIndexForPoint:point];
 }
 
