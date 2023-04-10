@@ -8,7 +8,7 @@
 #import "MPITextSelectionView.h"
 #import "MPITextGeometryHelpers.h"
 
-#define kGrabberTouchHitTestExtend 14.0
+#define kGrabberTouchHitTestExtend 20.0
 #define kKnobTouchHitTestExtend 7.0
 #define kSelectionAlpha 0.2
 
