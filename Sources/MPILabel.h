@@ -168,6 +168,8 @@ Whether or not the text is truncated. It's expensive if text not rendered.
 /// Note: You can change the selection's style with tintColor.
 @property(nonatomic, getter=isSelectable) BOOL selectable;
 
+@property(nonatomic, getter=isSelectAllAtFirst) BOOL selectAllAtFirst;
+
 /// The current selection range of the receiver.  
 @property(nonatomic) NSRange selectedRange;
 

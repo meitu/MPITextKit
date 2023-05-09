@@ -248,6 +248,7 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     _highlightedLinkTextAttributes = MPITextDefaultHighlightedLinkTextAttributes();
     
     _selectable = NO;
+    _selectAllAtFirst = NO;
     _selectedRange = NSMakeRange(NSNotFound, 0);
     
     _clearContentsBeforeAsynchronouslyDisplay = YES;
@@ -748,7 +749,7 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
     return [renderer characterIndexForPoint:point];
 }
 
-- (void)beginSelectionAtPoint:(CGPoint)point; {
+- (void)beginSelectionAtPoint:(CGPoint)point {
     MPITextRenderer *renderer = [self currentRenderer];
     point = [self convertPointToTextKit:point forBounds:self.bounds textSize:renderer.size];
     NSUInteger characterIndex = [renderer characterIndexForPoint:point];
@@ -756,10 +757,14 @@ static NSString *const kAsyncFadeAnimationKey = @"contents";
         return;
     }
     
-    NSRange selectedRange = [renderer rangeEnclosingCharacterForIndex:characterIndex];
-    if (selectedRange.location == NSNotFound) {
-        return;
+    NSRange selectedRange = NSMakeRange(0, self.text.length);
+    if (!self.isSelectAllAtFirst || self.selectedRange.location != NSNotFound) {
+        selectedRange = [renderer rangeEnclosingCharacterForIndex:characterIndex];
+        if (selectedRange.location == NSNotFound) {
+            return;
+        }
     }
+    
     if ([self.delegate respondsToSelector:@selector(labelWillBeginSelection:selectedRange:)]) {
         [self.delegate labelWillBeginSelection:self selectedRange:&selectedRange];
     }
