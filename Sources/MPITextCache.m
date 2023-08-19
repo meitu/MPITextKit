@@ -10,7 +10,7 @@
 #import <CoreFoundation/CoreFoundation.h>
 #import <pthread.h>
 
-static inline dispatch_queue_t MPITextMemoryCacheGetReleaseQueue() {
+static inline dispatch_queue_t MPITextMemoryCacheGetReleaseQueue(void) {
     return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
 }
 

@@ -20,22 +20,22 @@
 #import "NSMutableAttributedString+MPITextKit.h"
 #import "NSAttributedString+MPITextKit.h"
 
-static dispatch_queue_t MPITextLabelGetReleaseQueue() {
+static dispatch_queue_t MPITextLabelGetReleaseQueue(void) {
     return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
 }
 
-static MPITextCache *sharedRendererCache()
+static MPITextCache *sharedRendererCache(void)
 {
     static dispatch_once_t onceToken;
     static MPITextCache *rendererCache = nil;
     dispatch_once(&onceToken, ^{
         rendererCache = [[MPITextCache alloc] init];
-        rendererCache.countLimit = 500;
+        rendererCache.countLimit = 200;
     });
     return rendererCache;
 }
 
-static MPITextCache *sharedTextSizeCache()
+static MPITextCache *sharedTextSizeCache(void)
 {
     static dispatch_once_t onceToken;
     static MPITextCache *textViewSizeCache = nil;

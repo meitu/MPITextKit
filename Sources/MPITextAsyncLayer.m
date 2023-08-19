@@ -19,7 +19,7 @@ static dispatch_queue_t MPITextAsyncLayerGetDisplayQueue(void) {
     static dispatch_once_t onceToken;
     static int32_t counter = 0;
     dispatch_once(&onceToken, ^{
-        queueCount = (int)[NSProcessInfo processInfo].activeProcessorCount;
+        queueCount = (int32_t)[NSProcessInfo processInfo].activeProcessorCount;
         queueCount = queueCount < 1 ? 1 : queueCount > MAX_QUEUE_COUNT ? MAX_QUEUE_COUNT : queueCount;
         if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
             for (NSUInteger i = 0; i < queueCount; i++) {
@@ -128,7 +128,6 @@ static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue(void) {
                 CGColorRelease(backgroundColor);
                 return;
             }
-            
             UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
             format.opaque = opaque;
             format.scale = scale;
@@ -148,9 +147,7 @@ static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue(void) {
                 }
                 task.display(context, size, isCancelled);
             }];
-            
             CGColorRelease(backgroundColor);
-            
             if (isCancelled()) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (task.didDisplay) task.didDisplay(self, NO);
