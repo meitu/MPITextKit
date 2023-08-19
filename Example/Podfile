@@ -13,3 +13,12 @@ target 'MPITextKit_Example' do
 #    pod 'Expecta'
   end
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+    end
+  end
+  installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "Meitu"
+end

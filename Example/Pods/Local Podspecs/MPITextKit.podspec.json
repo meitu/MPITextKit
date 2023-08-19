@@ -1,6 +1,6 @@
 {
   "name": "MPITextKit",
-  "version": "0.1.11",
+  "version": "0.2.1",
   "summary": "Powerful text framework for iOS to display text based on TextKit.",
   "homepage": "https://github.com/meitu/MPITextKit",
   "license": {
@@ -12,10 +12,10 @@
   },
   "source": {
     "git": "https://github.com/meitu/MPITextKit.git",
-    "tag": "0.1.11"
+    "tag": "0.2.1"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "10.0"
   },
   "source_files": "Sources/**/*.{h,m}",
   "frameworks": [

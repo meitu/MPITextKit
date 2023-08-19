@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MPITextKit'
-  s.version          = '0.1.13'
+  s.version          = '0.2.1'
   s.summary          = 'Powerful text framework for iOS to display text based on TextKit.'
 
 # This description is used to generate tags and improve search results.
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/meitu/MPITextKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'Sources/**/*.{h,m}'
 

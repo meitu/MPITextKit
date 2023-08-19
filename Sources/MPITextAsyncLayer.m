@@ -12,9 +12,9 @@
 #import "MPITextGeometryHelpers.h"
 
 /// Global display queue, used for content rendering.
-static dispatch_queue_t MPITextAsyncLayerGetDisplayQueue() {
+static dispatch_queue_t MPITextAsyncLayerGetDisplayQueue(void) {
 #define MAX_QUEUE_COUNT 8
-    static int queueCount;
+    static int32_t queueCount;
     static dispatch_queue_t queues[MAX_QUEUE_COUNT];
     static dispatch_once_t onceToken;
     static int32_t counter = 0;
@@ -33,12 +33,12 @@ static dispatch_queue_t MPITextAsyncLayerGetDisplayQueue() {
             }
         }
     });
-    uint32_t cur = (uint32_t)OSAtomicIncrement32(&counter);
+    int32_t cur = OSAtomicIncrement32(&counter);
     return queues[(cur) % queueCount];
 #undef MAX_QUEUE_COUNT
 }
 
-static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue() {
+static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue(void) {
     return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
 }
 
@@ -97,6 +97,23 @@ static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue() {
         return;
     }
     
+    BOOL opaque = self.opaque;
+    CGFloat scale = self.contentsScale;
+    CGSize size = self.bounds.size;
+    
+    if (size.width < MPITextOnePixel() || size.height < MPITextOnePixel()) {
+        if (task.willDisplay) task.willDisplay(self);
+        CGImageRef image = (__bridge_retained CGImageRef)(self.contents);
+        self.contents = nil;
+        if (image) {
+            dispatch_async(MPITextAsyncLayerGetReleaseQueue(), ^{
+                CFRelease(image);
+            });
+        }
+        if (task.didDisplay) task.didDisplay(self, YES);
+        return;
+    }
+    
     if (async) {
         if (task.willDisplay) task.willDisplay(self);
         MPITextSentinel *sentinel = _sentinel;
@@ -104,55 +121,36 @@ static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue() {
         BOOL (^isCancelled)(void) = ^BOOL(void) {
             return value != sentinel.value;
         };
-        CGSize size = self.bounds.size;
-        BOOL opaque = self.opaque;
-        CGFloat scale = self.contentsScale;
         CGColorRef backgroundColor = (opaque && self.backgroundColor) ? CGColorRetain(self.backgroundColor) : NULL;
-        if (size.width < 1 || size.height < 1) {
-            CGImageRef image = (__bridge_retained CGImageRef)(self.contents);
-            self.contents = nil;
-            if (image) {
-                dispatch_async(MPITextAsyncLayerGetReleaseQueue(), ^{
-                    CFRelease(image);
-                });
-            }
-            if (task.didDisplay) task.didDisplay(self, YES);
-            CGColorRelease(backgroundColor);
-            return;
-        }
         
         dispatch_async(MPITextAsyncLayerGetDisplayQueue(), ^{
             if (isCancelled()) {
                 CGColorRelease(backgroundColor);
                 return;
             }
-            UIGraphicsBeginImageContextWithOptions(size, opaque, scale);
-            CGContextRef context = UIGraphicsGetCurrentContext();
-            if (opaque && context) {
-                CGContextSaveGState(context); {
-                    if (!backgroundColor || CGColorGetAlpha(backgroundColor) < 1) {
-                        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-                        CGContextAddRect(context, CGRectMake(0, 0, size.width * scale, size.height * scale));
+            
+            UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+            format.opaque = opaque;
+            format.scale = scale;
+            UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:format];
+            UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+                CGContextRef context = rendererContext.CGContext;
+                if (opaque && context) {
+                    CGContextSaveGState(context); {
+                        if (!backgroundColor) {
+                            CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+                        } else {
+                            CGContextSetFillColorWithColor(context, backgroundColor);
+                        }
+                        CGContextAddRect(context, CGRectMake(0, 0, size.width, size.height));
                         CGContextFillPath(context);
-                    }
-                    if (backgroundColor) {
-                        CGContextSetFillColorWithColor(context, backgroundColor);
-                        CGContextAddRect(context, CGRectMake(0, 0, size.width * scale, size.height * scale));
-                        CGContextFillPath(context);
-                    }
-                } CGContextRestoreGState(context);
-                CGColorRelease(backgroundColor);
-            }
-            task.display(context, size, isCancelled);
-            if (isCancelled()) {
-                UIGraphicsEndImageContext();
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (task.didDisplay) task.didDisplay(self, NO);
-                });
-                return;
-            }
-            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
+                    } CGContextRestoreGState(context);
+                }
+                task.display(context, size, isCancelled);
+            }];
+            
+            CGColorRelease(backgroundColor);
+            
             if (isCancelled()) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (task.didDisplay) task.didDisplay(self, NO);
@@ -171,28 +169,25 @@ static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue() {
     } else {
         [_sentinel increase];
         if (task.willDisplay) task.willDisplay(self);
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, self.contentsScale);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        if (self.opaque && context) {
-            CGSize size = self.bounds.size;
-            size.width *= self.contentsScale;
-            size.height *= self.contentsScale;
-            CGContextSaveGState(context); {
-                if (!self.backgroundColor || CGColorGetAlpha(self.backgroundColor) < 1) {
-                    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = opaque;
+        format.scale = scale;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:format];
+        UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            if (opaque && context) {
+                CGContextSaveGState(context); {
+                    if (!self.backgroundColor) {
+                        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+                    } else {
+                        CGContextSetFillColorWithColor(context, self.backgroundColor);
+                    }
                     CGContextAddRect(context, CGRectMake(0, 0, size.width, size.height));
                     CGContextFillPath(context);
-                }
-                if (self.backgroundColor) {
-                    CGContextSetFillColorWithColor(context, self.backgroundColor);
-                    CGContextAddRect(context, CGRectMake(0, 0, size.width, size.height));
-                    CGContextFillPath(context);
-                }
-            } CGContextRestoreGState(context);
-        }
-        task.display(context, self.bounds.size, ^{return NO;});
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+                } CGContextRestoreGState(context);
+            }
+            task.display(context, size, ^{return NO;});
+        }];
         self.contents = (__bridge id)(image.CGImage);
         if (task.didDisplay) task.didDisplay(self, YES);
     }
