@@ -9,20 +9,20 @@
 #import "MPITextDefaultsValueHelpers.h"
 #import "MPITextAttributes.h"
 
-NSDictionary *MPITextDefaultLinkTextAttributes() {
+NSDictionary *MPITextDefaultLinkTextAttributes(void) {
     return @{
              NSForegroundColorAttributeName: [UIColor colorWithRed:69 / 255.f green:110 / 255.f blue:192 / 255.f alpha:1.f]
              };
 }
 
-NSDictionary *MPITextDefaultHighlightedLinkTextAttributes() {
+NSDictionary *MPITextDefaultHighlightedLinkTextAttributes(void) {
     MPITextBackground *background = [MPITextBackground backgroundWithFillColor:UIColor.lightGrayColor cornerRadius:3.0];
     return  @{
               MPITextBackgroundAttributeName: background,
               };
 }
 
-NSCharacterSet *MPITextDefaultAvoidTruncationCharacterSet() {
+NSCharacterSet *MPITextDefaultAvoidTruncationCharacterSet(void) {
     static NSCharacterSet *truncationCharacterSet;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -36,7 +36,7 @@ NSCharacterSet *MPITextDefaultAvoidTruncationCharacterSet() {
     return truncationCharacterSet;
 }
 
-NSAttributedString *MPITextDefaultTruncationAttributedToken() {
+NSAttributedString *MPITextDefaultTruncationAttributedToken(void) {
     static NSAttributedString *defaultTruncationAttributedToken;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -45,7 +45,7 @@ NSAttributedString *MPITextDefaultTruncationAttributedToken() {
     return defaultTruncationAttributedToken;
 }
 
-NSString *MPITextDefaultTruncationToken() {
+NSString *MPITextDefaultTruncationToken(void) {
     static NSString *defaultTruncationToken;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -54,6 +54,6 @@ NSString *MPITextDefaultTruncationToken() {
     return defaultTruncationToken;
 }
 
-CGFloat MPITextCoreTextDefaultFontSize() {
+CGFloat MPITextCoreTextDefaultFontSize(void) {
     return 12.0;
 }

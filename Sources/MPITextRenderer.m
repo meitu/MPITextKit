@@ -18,7 +18,7 @@
 #import "MPITextKitConst.h"
 #import "MPITextInput.h"
 
-static MPITextCache *sharedTruncaterCache()
+static MPITextCache *sharedTruncaterCache(void)
 {
     static dispatch_once_t onceToken;
     static MPITextCache *truncaterCache = nil;

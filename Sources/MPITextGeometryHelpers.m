@@ -123,7 +123,7 @@ CGRect MPITextCGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMo
     return rect;
 }
 
-CGFloat MPITextScreenScale() {
+CGFloat MPITextScreenScale(void) {
     static CGFloat scale;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -132,7 +132,7 @@ CGFloat MPITextScreenScale() {
     return scale;
 }
 
-CGSize MPITextScreenSize() {
+CGSize MPITextScreenSize(void) {
     static CGSize size;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -146,7 +146,7 @@ CGSize MPITextScreenSize() {
     return size;
 }
 
-CGFloat MPITextOnePixel() {
+CGFloat MPITextOnePixel(void) {
     static CGFloat onePixel;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
