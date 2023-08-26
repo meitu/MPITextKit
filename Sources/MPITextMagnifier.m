@@ -87,60 +87,59 @@
         CGRect rect = (CGRect) {.size = size, .origin = CGPointZero};
         rect = CGRectInset(rect, kPadding, kPadding);
         
-        UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        
-        CGPathRef boxPath = CGPathCreateWithRect(CGRectMake(0, 0, size.width, size.height), NULL);
-        CGPathRef fillPath = CGPathCreateWithEllipseInRect(rect, NULL);
-        CGPathRef strokePath = CGPathCreateWithEllipseInRect(MPITextCGRectPixelHalf(rect), NULL);
-        
-        // inner shadow
-        CGContextSaveGState(context); {
-            CGFloat blurRadius = 25;
-            CGSize offset = CGSizeMake(0, 15);
-            CGColorRef shadowColor = [UIColor colorWithWhite:0 alpha:0.16].CGColor;
-            CGColorRef opaqueShadowColor = CGColorCreateCopyWithAlpha(shadowColor, 1.0);
-            CGContextAddPath(context, fillPath);
-            CGContextClip(context);
-            CGContextSetAlpha(context, CGColorGetAlpha(shadowColor));
-            CGContextBeginTransparencyLayer(context, NULL); {
-                CGContextSetShadowWithColor(context, offset, blurRadius, opaqueShadowColor);
-                CGContextSetBlendMode(context, kCGBlendModeSourceOut);
-                CGContextSetFillColorWithColor(context, opaqueShadowColor);
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:format];
+        UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            CGPathRef boxPath = CGPathCreateWithRect(CGRectMake(0, 0, size.width, size.height), NULL);
+            CGPathRef fillPath = CGPathCreateWithEllipseInRect(rect, NULL);
+            CGPathRef strokePath = CGPathCreateWithEllipseInRect(MPITextCGRectPixelHalf(rect), NULL);
+            
+            // inner shadow
+            CGContextSaveGState(context); {
+                CGFloat blurRadius = 25;
+                CGSize offset = CGSizeMake(0, 15);
+                CGColorRef shadowColor = [UIColor colorWithWhite:0 alpha:0.16].CGColor;
+                CGColorRef opaqueShadowColor = CGColorCreateCopyWithAlpha(shadowColor, 1.0);
                 CGContextAddPath(context, fillPath);
-                CGContextFillPath(context);
-            } CGContextEndTransparencyLayer(context);
-            CGColorRelease(opaqueShadowColor);
-        } CGContextRestoreGState(context);
-        
-        // outer shadow
-        CGContextSaveGState(context); {
-            CGContextAddPath(context, boxPath);
-            CGContextAddPath(context, fillPath);
-            CGContextEOClip(context);
-            CGColorRef shadowColor = [UIColor colorWithWhite:0 alpha:0.32].CGColor;
-            CGContextSetShadowWithColor(context, CGSizeMake(0, 1.5), 3, shadowColor);
-            CGContextBeginTransparencyLayer(context, NULL); {
+                CGContextClip(context);
+                CGContextSetAlpha(context, CGColorGetAlpha(shadowColor));
+                CGContextBeginTransparencyLayer(context, NULL); {
+                    CGContextSetShadowWithColor(context, offset, blurRadius, opaqueShadowColor);
+                    CGContextSetBlendMode(context, kCGBlendModeSourceOut);
+                    CGContextSetFillColorWithColor(context, opaqueShadowColor);
+                    CGContextAddPath(context, fillPath);
+                    CGContextFillPath(context);
+                } CGContextEndTransparencyLayer(context);
+                CGColorRelease(opaqueShadowColor);
+            } CGContextRestoreGState(context);
+            
+            // outer shadow
+            CGContextSaveGState(context); {
+                CGContextAddPath(context, boxPath);
                 CGContextAddPath(context, fillPath);
-                [[UIColor colorWithWhite:0.7 alpha:1.000] setFill];
-                CGContextFillPath(context);
-            } CGContextEndTransparencyLayer(context);
-        } CGContextRestoreGState(context);
-        
-        // stroke
-        CGContextSaveGState(context); {
-            CGContextAddPath(context, strokePath);
-            [[UIColor colorWithWhite:0.6 alpha:1] setStroke];
-            CGContextSetLineWidth(context, MPITextCGFloatFromPixel(1));
-            CGContextStrokePath(context);
-        } CGContextRestoreGState(context);
-        
-        CFRelease(boxPath);
-        CFRelease(fillPath);
-        CFRelease(strokePath);
-        
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+                CGContextEOClip(context);
+                CGColorRef shadowColor = [UIColor colorWithWhite:0 alpha:0.32].CGColor;
+                CGContextSetShadowWithColor(context, CGSizeMake(0, 1.5), 3, shadowColor);
+                CGContextBeginTransparencyLayer(context, NULL); {
+                    CGContextAddPath(context, fillPath);
+                    [[UIColor colorWithWhite:0.7 alpha:1.000] setFill];
+                    CGContextFillPath(context);
+                } CGContextEndTransparencyLayer(context);
+            } CGContextRestoreGState(context);
+            
+            // stroke
+            CGContextSaveGState(context); {
+                CGContextAddPath(context, strokePath);
+                [[UIColor colorWithWhite:0.6 alpha:1] setStroke];
+                CGContextSetLineWidth(context, MPITextCGFloatFromPixel(1));
+                CGContextStrokePath(context);
+            } CGContextRestoreGState(context);
+            
+            CFRelease(boxPath);
+            CFRelease(fillPath);
+            CFRelease(strokePath);
+        }];
         
     });
     return image;
