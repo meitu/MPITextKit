@@ -7,34 +7,27 @@
 //
 
 #import "MPITextAsyncLayer.h"
+#import <stdatomic.h>
 #import "MPITextSentinel.h"
-#import <libkern/OSAtomic.h>
 #import "MPITextGeometryHelpers.h"
 
 /// Global display queue, used for content rendering.
 static dispatch_queue_t MPITextAsyncLayerGetDisplayQueue(void) {
 #define MAX_QUEUE_COUNT 8
-    static int32_t queueCount;
+    static long queueCount;
     static dispatch_queue_t queues[MAX_QUEUE_COUNT];
     static dispatch_once_t onceToken;
-    static int32_t counter = 0;
+    static atomic_long counter;
     dispatch_once(&onceToken, ^{
-        queueCount = (int32_t)[NSProcessInfo processInfo].activeProcessorCount;
+        queueCount = (long)[NSProcessInfo processInfo].activeProcessorCount;
         queueCount = queueCount < 1 ? 1 : queueCount > MAX_QUEUE_COUNT ? MAX_QUEUE_COUNT : queueCount;
-        if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-            for (NSUInteger i = 0; i < queueCount; i++) {
-                dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, 0);
-                queues[i] = dispatch_queue_create("com.mpitextkit.text.render", attr);
-            }
-        } else {
-            for (NSUInteger i = 0; i < queueCount; i++) {
-                queues[i] = dispatch_queue_create("com.mpitextkit.text.render", DISPATCH_QUEUE_SERIAL);
-                dispatch_set_target_queue(queues[i], dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
-            }
+        for (NSUInteger i = 0; i < queueCount; i++) {
+            dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, 0);
+            queues[i] = dispatch_queue_create("com.mpitextkit.text.render", attr);
         }
     });
-    int32_t cur = OSAtomicIncrement32(&counter);
-    return queues[(cur) % queueCount];
+    long cur = atomic_fetch_add_explicit(&counter, 1, memory_order_relaxed);
+    return queues[cur % queueCount];
 #undef MAX_QUEUE_COUNT
 }
 
@@ -117,7 +110,7 @@ static dispatch_queue_t MPITextAsyncLayerGetReleaseQueue(void) {
     if (async) {
         if (task.willDisplay) task.willDisplay(self);
         MPITextSentinel *sentinel = _sentinel;
-        int32_t value = sentinel.value;
+        long value = sentinel.value;
         BOOL (^isCancelled)(void) = ^BOOL(void) {
             return value != sentinel.value;
         };

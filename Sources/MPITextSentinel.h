@@ -12,9 +12,9 @@
 @interface MPITextSentinel : NSObject
 
 /// Returns the current value of the counter.
-@property (atomic, readonly) int32_t value;
+@property (atomic, readonly) long value;
 
 /// Increase the value atomically. @return The new value.
-- (int32_t)increase;
+- (long)increase;
 
 @end
