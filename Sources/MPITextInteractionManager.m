@@ -29,6 +29,12 @@
 @property (nonatomic, assign) MPITextSelectionGrabberType trackingGrabberType;
 @property (nonatomic, assign) NSUInteger pinnedGrabberIndex;
 
+@property (nonatomic, assign) NSRange activeLinkRange;
+@property (nonatomic, assign) BOOL activeInTruncation;
+
+@property (nullable, nonatomic, copy) NSAttributedString *highlightedAttributedText;
+@property (nullable, nonatomic, copy) NSAttributedString *snapshotAttributedText;
+
 @end
 
 @implementation MPITextInteractionManager
@@ -149,14 +155,14 @@
     if (!self.hasActiveLink) {
         return;
     }
-    [self.interactableView tapLinkWithLinkRange:self.activeLinkRange forAttributedText:self.attributedText];
+    [self.interactableView tapLinkWithLinkRange:self.activeLinkRange forAttributedText:self.snapshotAttributedText];
 }
 
 - (void)longPressLinkIfNeeded {
     if (!self.hasActiveLink) {
         return;
     }
-    [self.interactableView longPressLinkWithLinkRange:self.activeLinkRange forAttributedText:self.attributedText];
+    [self.interactableView longPressLinkWithLinkRange:self.activeLinkRange forAttributedText:self.snapshotAttributedText];
 }
 
 - (void)beginSelectionAtPoint:(CGPoint)point {
@@ -193,19 +199,19 @@
     }
     MPITextInteractableView *interactableView = self.interactableView;
     
-    NSMutableAttributedString *highlightedLinkAttributedText = [[self.attributedText attributedSubstringFromRange:self.activeLinkRange] mutableCopy];
+    NSMutableAttributedString *highlightedLinkAttributedText = [[self.snapshotAttributedText attributedSubstringFromRange:self.activeLinkRange] mutableCopy];
     
     NSDictionary<NSString *, id> *textAttributes = [interactableView highlightedLinkTextAttributesWithLinkRange:self.activeLinkRange
-                                                                                              forAttributedText:self.attributedText];
+                                                                                              forAttributedText:self.snapshotAttributedText];
     if (textAttributes) {
         [highlightedLinkAttributedText addAttributes:textAttributes range:highlightedLinkAttributedText.mpi_rangeOfAll];
     }
     [highlightedLinkAttributedText addAttribute:MPITextHighlightedAttributeName value:@(YES) range:highlightedLinkAttributedText.mpi_rangeOfAll];
     
-    NSMutableAttributedString *highlightedAttributedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSMutableAttributedString *highlightedAttributedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.snapshotAttributedText];
     [highlightedAttributedText replaceCharactersInRange:self.activeLinkRange withAttributedString:highlightedLinkAttributedText];
     
-    _highlightedAttributedText = highlightedAttributedText;
+    self.highlightedAttributedText = highlightedAttributedText;
     
     [self notifyDidUpdateHighlightedAttributedText];
 }
@@ -215,11 +221,26 @@
         return;
     }
     
-    _activeLinkRange = NSMakeRange(NSNotFound, 0);
-    _activeInTruncation = NO;
-    _highlightedAttributedText = nil;
+    [self clearActiveLink];
     
     [self notifyDidUpdateHighlightedAttributedText];
+}
+
+- (NSAttributedString *)captureAttributedTextWithActiveInTruncation:(BOOL)activeInTruncation {
+    MPITextInteractableView *interactableView = self.interactableView;
+    if (interactableView.textRenderer) {
+        MPITextRenderAttributes *renderAttributes = interactableView.textRenderer.renderAttributes;
+        return activeInTruncation ? renderAttributes.truncationAttributedText : renderAttributes.attributedText;
+    } else {
+        return activeInTruncation ? interactableView.truncationAttributedText : interactableView.attributedText;
+    }
+}
+
+- (void)clearActiveLink {
+    self.activeLinkRange = NSMakeRange(NSNotFound, 0);
+    self.activeInTruncation = NO;
+    self.highlightedAttributedText = nil;
+    self.snapshotAttributedText = nil;
 }
 
 #pragma mark - Private (Menu)
@@ -299,15 +320,28 @@
     MPITextInteractableView *interactableView = self.interactableView;
     CGPoint location = [gestureRecognizer locationInView:interactableView];
     if (gestureRecognizer == self.interactiveGestureRecognizer) {
-        _activeLinkRange = [self linkRangeAtPoint:location inTruncation:&_activeInTruncation];
+        NSAttributedString *snapshotAttributedTextBefore = [self captureAttributedTextWithActiveInTruncation:NO];
+        NSAttributedString *snapshotTruncationAttributedTextBefore = [self captureAttributedTextWithActiveInTruncation:YES];
+        BOOL activeInTruncation = NO;
+        self.activeLinkRange = [self linkRangeAtPoint:location inTruncation:&activeInTruncation];
+        self.activeInTruncation = activeInTruncation;
+        NSAttributedString *snapshotAttributedTextEnd = [self captureAttributedTextWithActiveInTruncation:NO];
+        NSAttributedString *snapshotTruncationAttributedTextEnd = [self captureAttributedTextWithActiveInTruncation:YES];
+        if (snapshotAttributedTextBefore != snapshotAttributedTextEnd ||
+            snapshotTruncationAttributedTextBefore != snapshotTruncationAttributedTextEnd) { // The attributedText was changed
+            [self clearActiveLink];
+        }
         
-        if (self.activeLinkRange.location != NSNotFound &&
-            NSMaxRange(self.activeLinkRange) <= self.attributedText.length) {
+        if (self.activeLinkRange.location != NSNotFound) {
+            if (self.activeInTruncation) {
+                self.snapshotAttributedText = snapshotTruncationAttributedTextEnd;
+            } else {
+                self.snapshotAttributedText = snapshotAttributedTextEnd;
+            }
             BOOL shouldInteractLink = [interactableView shouldInteractLinkWithLinkRange:self.activeLinkRange
-                                                                      forAttributedText:self.attributedText];
+                                                                      forAttributedText:self.snapshotAttributedText];
             if (!shouldInteractLink) {
-                _activeLinkRange = NSMakeRange(NSNotFound, 0);
-                _activeInTruncation = NO;
+                [self clearActiveLink];
             }
         }
         
@@ -325,16 +359,6 @@
     return
     self.activeLinkRange.location != NSNotFound &&
     self.activeLinkRange.length > 0;
-}
-
-- (NSAttributedString *)attributedText {
-    MPITextInteractableView *interactableView = self.interactableView;
-    if (interactableView.textRenderer) {
-        MPITextRenderAttributes *renderAttributes = interactableView.textRenderer.renderAttributes;
-        return self.activeInTruncation ? renderAttributes.truncationAttributedText : renderAttributes.attributedText;
-    } else {
-        return self.activeInTruncation ? interactableView.truncationAttributedText : interactableView.attributedText;
-    }
 }
 
 - (UIPanGestureRecognizer *)grabberPanGestureRecognizer {

@@ -77,10 +77,10 @@ typedef UIView<MPITextInteractable> MPITextInteractableView;
 @property (nonatomic, weak) id<MPITextInteractionManagerDelegate> delegate;
 
 @property (nonatomic, readonly) BOOL hasActiveLink;
-@property (nonatomic, readonly) NSRange activeLinkRange;
-@property (nonatomic, readonly) BOOL activeInTruncation;
-@property (nonatomic, readonly) NSAttributedString *attributedText;
+@property (nonatomic, assign, readonly) BOOL activeInTruncation;
+
 @property (nullable, nonatomic, copy, readonly) NSAttributedString *highlightedAttributedText;
+
 
 - (instancetype)initWithInteractableView:(MPITextInteractableView *)interactableView;
 
