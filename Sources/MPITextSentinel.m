@@ -8,7 +8,6 @@
 
 #import "MPITextSentinel.h"
 #import <stdatomic.h>
-#import <stdatomic.h>
 
 @interface MPITextSentinel () {
     atomic_long _counter;
