@@ -73,7 +73,7 @@
 
     // paragraphSpacing
     CGFloat paragraphSpacing = 0;
-    if (paragraphStyle.paragraphSpacing > FLT_EPSILON) {
+    if (paragraphStyle.paragraphSpacing > FLT_EPSILON || paragraphStyle.paragraphSpacing < -FLT_EPSILON) {
         NSRange charaterRange = [layoutManager characterRangeForGlyphRange:NSMakeRange(NSMaxRange(glyphRange) - 1, 1) actualGlyphRange:NULL];
         NSAttributedString *attributedString = [textStorage attributedSubstringFromRange:charaterRange];
         if ([attributedString.string isEqualToString:@"\n"]) {

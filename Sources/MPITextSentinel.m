@@ -7,13 +7,22 @@
 //
 
 #import "MPITextSentinel.h"
-#import <libkern/OSAtomic.h>
 #import <stdatomic.h>
+
+@interface MPITextSentinel () {
+    atomic_long _counter;
+}
+
+@end
 
 @implementation MPITextSentinel
 
-- (int32_t)increase {
-    return OSAtomicIncrement32(&_value);
+- (long)increase {
+    return atomic_fetch_add_explicit(&_counter, 1, memory_order_relaxed) + 1;
+}
+
+- (long)value {
+    return _counter;
 }
 
 @end
