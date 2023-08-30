@@ -1,5 +1,5 @@
 PODS:
-  - MPITextKit (0.2.3)
+  - MPITextKit (0.2.4)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MPITextKit: d362b015ea6aa294cb3c77826c99cb1d744ed58f
+  MPITextKit: e9b17481ce626c6298be148c4ccea2ee872bc9a5
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
 PODFILE CHECKSUM: 9cca02461ddd01cfc6deea5304d2f3a78a0397fd
