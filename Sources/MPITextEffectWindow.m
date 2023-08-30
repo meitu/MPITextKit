@@ -196,12 +196,12 @@
             dispatch_once(&onceToken, ^{
                 CGRect rect = mag.bounds;
                 rect.origin = CGPointZero;
-                UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-                CGContextRef context = UIGraphicsGetCurrentContext();
-                [[UIColor colorWithWhite:1 alpha:0.8] set];
-                CGContextFillRect(context, rect);
-                placeholder = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
+                UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:rect.size];
+                placeholder = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+                    CGContextRef context = rendererContext.CGContext;
+                    [[UIColor colorWithWhite:1 alpha:0.8] set];
+                    CGContextFillRect(context, rect);
+                }];
             });
             mag.captureFadeAnimation = YES;
             mag.snapshot = placeholder;
@@ -210,21 +210,17 @@
         return rotation;
     }
     
-    UIGraphicsBeginImageContextWithOptions(captureRect.size, NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    if (!context) return rotation;
-    
-    CGPoint tp = CGPointMake(captureRect.size.width / 2, captureRect.size.height / 2);
-    tp = CGPointApplyAffineTransform(tp, CGAffineTransformMakeRotation(rotation));
-    CGContextRotateCTM(context, -rotation);
-    CGContextTranslateCTM(context, tp.x - captureCenter.x, tp.y - captureCenter.y);
-    CGContextSaveGState(context);
-    CGContextConcatCTM(context, MPITextCGAffineTransformGetFromViews(hostWindow, self));
-    [hostWindow.layer renderInContext:context];
-//    [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO]; //slower when capture whole window
-    CGContextRestoreGState(context);
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:captureRect.size];
+    UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+        CGContextRef context = rendererContext.CGContext;
+        CGPoint tp = CGPointMake(captureRect.size.width / 2, captureRect.size.height / 2);
+        tp = CGPointApplyAffineTransform(tp, CGAffineTransformMakeRotation(rotation));
+        CGContextRotateCTM(context, -rotation);
+        CGContextTranslateCTM(context, tp.x - captureCenter.x, tp.y - captureCenter.y);
+        CGContextConcatCTM(context, MPITextCGAffineTransformGetFromViews(hostWindow, self));
+        [hostWindow.layer renderInContext:context];
+        // [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO]; //slower when capture whole window
+    }];
     
     if (mag.snapshot.size.width == 1) {
         mag.captureFadeAnimation = YES;
