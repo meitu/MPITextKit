@@ -85,7 +85,12 @@
     CGRect usedRect = *lineFragmentUsedRect;
 
     CGFloat usedHeight = MAX(maximumLineHeight, usedRect.size.height);
-    rect.size.height = paragraphSpacingBefore + usedHeight + maximumLineSpacing + paragraphSpacing;
+    if (paragraphSpacingBefore < -FLT_EPSILON) {
+        rect.origin.y += paragraphSpacingBefore;
+        rect.size.height = usedHeight + maximumLineSpacing + paragraphSpacing;
+    } else {
+        rect.size.height = paragraphSpacingBefore + usedHeight + maximumLineSpacing + paragraphSpacing;
+    }
     usedRect.size.height = usedHeight;
 
     *lineFragmentRect = rect;
